@@ -15,4 +15,5 @@ To run tests:
 
 ```shell
 docker-compose run php vendor/bin/phpunit
+docker-compose run php vendor/bin/phpstan analyze
 ```
