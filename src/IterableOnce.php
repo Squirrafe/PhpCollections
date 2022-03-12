@@ -2,16 +2,16 @@
 
 namespace Squingla\Collections;
 
-use Traversable;
+use IteratorAggregate;
 
 /**
  * Basic interface for all collections in library. Allows using collections in foreach loops. All collections
  * implementing that interface must be immutable.
  *
  * @template T
- * @template-extends Traversable<int,T>
+ * @template-extends IteratorAggregate<int,T>
  */
-interface IterableOnce extends Traversable
+interface IterableOnce extends IteratorAggregate
 {
     /**
      * Returns number of elements in collection.
@@ -19,6 +19,19 @@ interface IterableOnce extends Traversable
      * @return int
      */
     public function getLength(): int;
+
+    /**
+     * Returns "true" if collection does not have any elements, "false" otherwise.
+     * @return bool
+     */
+    public function isEmpty(): bool;
+
+    /**
+     * Returns "true" if collection contains at least one element, "false" otherwise.
+     *
+     * @return bool
+     */
+    public function nonEmpty(): bool;
 
     /**
      * Returns number of elements in collection that satisfy given filter.
@@ -120,23 +133,11 @@ interface IterableOnce extends Traversable
     public function forEach(callable $consumer): void;
 
     /**
-     * Returns "true" if collection does not have any elements, "false" otherwise.
-     * @return bool
-     */
-    public function isEmpty(): bool;
-
-    /**
-     * Returns "true" if collection contains at least one element, "false" otherwise.
-     *
-     * @return bool
-     */
-    public function nonEmpty(): bool;
-
-    /**
      * Applies a binary operator to all elements of this collection, going left to right.
      *
      * @param callable(T,T): T $operator
      * @return T
+     * @throws UnsupportedTraversalException if collection is empty.
      */
     public function reduceLeft(callable $operator);
 
@@ -145,6 +146,7 @@ interface IterableOnce extends Traversable
      *
      * @param callable(T,T): T $operator
      * @return T
+     * @throws UnsupportedTraversalException if collection is empty.
      */
     public function reduceRight(callable $operator);
 }
