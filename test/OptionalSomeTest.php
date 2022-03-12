@@ -159,4 +159,10 @@ class OptionalSomeTest extends TestCase
         $optional = Optional::some(15);
         self::assertEquals(15, $optional->getOrNull());
     }
+
+    public function testGetOrElse(): void
+    {
+        $optional = Optional::some(15);
+        self::assertEquals(15, $optional->getOrElse(30));
+    }
 }

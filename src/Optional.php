@@ -290,4 +290,19 @@ class Optional implements IterableOnce
 
         return null;
     }
+
+    /**
+     * Returns content of given optional. If optional is empty, returns default value.
+     *
+     * @param T $default
+     * @return T
+     */
+    public function getOrElse($default)
+    {
+        if ($this->isSet) {
+            return $this->content[0];
+        }
+
+        return $default;
+    }
 }
