@@ -136,4 +136,9 @@ class OptionalNoneTest extends TestCase
         self::expectException(NoSuchElementException::class);
         Optional::none()->get();
     }
+
+    public function testGetOrNull(): void
+    {
+        self::assertNull(Optional::none()->getOrNull());
+    }
 }

@@ -272,4 +272,22 @@ class Optional implements IterableOnce
 
         throw new NoSuchElementException("Cannot call get() on empty Optional");
     }
+
+    /**
+     * Returns content of given optional. If optional is empty, returns null. Note that because optional can contain
+     * nullable values, you cannot use result of that method to see if optional was empty.
+     *
+     * For example, `Optional::some(null)->getOrNull()` will also return `null`, but `Optional::some(null)->isEmpty()`
+     * returns `false`.
+     *
+     * @return T|null
+     */
+    public function getOrNull()
+    {
+        if ($this->isSet) {
+            return $this->content[0];
+        }
+
+        return null;
+    }
 }
