@@ -3,5 +3,6 @@ version: "3.8"
 services:
   php:
     build: docker/dev
+    working_dir: /usr/src/collections
     volumes:
       - .:/usr/src/collections
