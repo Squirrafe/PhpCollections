@@ -3,6 +3,7 @@
 namespace Squingla\Test\Collections;
 
 use PHPUnit\Framework\TestCase;
+use Squingla\Collections\NoSuchElementException;
 use Squingla\Collections\Optional;
 use Squingla\Collections\UnsupportedTraversalException;
 
@@ -128,5 +129,11 @@ class OptionalNoneTest extends TestCase
         $optional = Optional::none();
         $reduced = $optional->reduceRightOption(fn (int $a, int $b) => $a + $b);
         self::assertTrue($reduced->isEmpty());
+    }
+
+    public function testGet(): void
+    {
+        self::expectException(NoSuchElementException::class);
+        Optional::none()->get();
     }
 }

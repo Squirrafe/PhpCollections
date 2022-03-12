@@ -257,4 +257,19 @@ class Optional implements IterableOnce
     {
         return $this;
     }
+
+    /**
+     * Returns content of given optional. If optional is empty, throws exception.
+     *
+     * @return T
+     * @throws NoSuchElementException if optional is empty
+     */
+    public function get()
+    {
+        if ($this->isSet) {
+            return $this->content[0];
+        }
+
+        throw new NoSuchElementException("Cannot call get() on empty Optional");
+    }
 }
