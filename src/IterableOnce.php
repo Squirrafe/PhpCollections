@@ -133,7 +133,8 @@ interface IterableOnce extends IteratorAggregate
     public function forEach(callable $consumer): void;
 
     /**
-     * Applies a binary operator to all elements of this collection, going left to right.
+     * Applies a binary operator to all elements of this collection, going left to right. If collection is empty, throws
+     * exception.
      *
      * @param callable(T,T): T $operator
      * @return T
@@ -142,11 +143,30 @@ interface IterableOnce extends IteratorAggregate
     public function reduceLeft(callable $operator);
 
     /**
-     * Applies a binary operator to all elements of this collection, going right to left.
+     * If collection is non-empty, applies a binary operator to all elements of this collection, going left to right,
+     * and returns an Optional with result. If collection is non empty, returns empty Optional.
+     *
+     * @param callable(T,T): T $operator
+     * @return Optional<T>
+     */
+    public function reduceLeftOption(callable $operator): Optional;
+
+    /**
+     * Applies a binary operator to all elements of this collection, going right to left. If collection is empty, throws
+     * exception.
      *
      * @param callable(T,T): T $operator
      * @return T
      * @throws UnsupportedTraversalException if collection is empty.
      */
     public function reduceRight(callable $operator);
+
+    /**
+     * If collection is non-empty, applies a binary operator to all elements of this collection, going right to left,
+     * and returns an Optional with result. If collection is non empty, returns empty Optional.
+     *
+     * @param callable(T,T): T $operator
+     * @return Optional<T>
+     */
+    public function reduceRightOption(callable $operator): Optional;
 }

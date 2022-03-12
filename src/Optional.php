@@ -239,6 +239,11 @@ class Optional implements IterableOnce
         throw new UnsupportedTraversalException("Cannot reduce an empty Optional");
     }
 
+    public function reduceLeftOption(callable $operator): Optional
+    {
+        return $this;
+    }
+
     public function reduceRight(callable $operator)
     {
         if ($this->isSet) {
@@ -246,5 +251,10 @@ class Optional implements IterableOnce
         }
 
         throw new UnsupportedTraversalException("Cannot reduce an empty Optional");
+    }
+
+    public function reduceRightOption(callable $operator): Optional
+    {
+        return $this;
     }
 }

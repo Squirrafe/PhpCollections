@@ -100,15 +100,33 @@ class OptionalNoneTest extends TestCase
 
     public function testReduceLeft(): void
     {
+        /** @var Optional<int> $optional */
         $optional = Optional::none();
         self::expectException(UnsupportedTraversalException::class);
-        $optional->reduceLeft(fn ($a, $b) => null);
+        $optional->reduceLeft(fn (int $a, int $b) => $a + $b);
+    }
+
+    public function testReduceLeftOption(): void
+    {
+        /** @var Optional<int> $optional */
+        $optional = Optional::none();
+        $reduced = $optional->reduceLeftOption(fn (int $a, int $b) => $a + $b);
+        self::assertTrue($reduced->isEmpty());
     }
 
     public function testReduceRight(): void
     {
+        /** @var Optional<int> $optional */
         $optional = Optional::none();
         self::expectException(UnsupportedTraversalException::class);
-        $optional->reduceRight(fn ($a, $b) => null);
+        $optional->reduceRight(fn (int $a, int $b) => $a + $b);
+    }
+
+    public function testReduceRightOption(): void
+    {
+        /** @var Optional<int> $optional */
+        $optional = Optional::none();
+        $reduced = $optional->reduceRightOption(fn (int $a, int $b) => $a + $b);
+        self::assertTrue($reduced->isEmpty());
     }
 }

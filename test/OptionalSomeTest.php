@@ -125,10 +125,26 @@ class OptionalSomeTest extends TestCase
         self::assertEquals(15, $reduced);
     }
 
+    public function testReduceLeftOption(): void
+    {
+        $optional = Optional::some(15);
+        $reduced = $optional->reduceLeftOption(fn (int $a, int $b) => $a + $b);
+        self::assertTrue($reduced->nonEmpty());
+        self::assertTrue($reduced->exists(fn (int $i) => $i === 15));
+    }
+
     public function testReduceRight(): void
     {
         $optional = Optional::some(15);
         $reduced = $optional->reduceRight(fn (int $a, int $b) => $a + $b);
         self::assertEquals(15, $reduced);
+    }
+
+    public function testReduceRightOption(): void
+    {
+        $optional = Optional::some(15);
+        $reduced = $optional->reduceRightOption(fn (int $a, int $b) => $a + $b);
+        self::assertTrue($reduced->nonEmpty());
+        self::assertTrue($reduced->exists(fn (int $i) => $i === 15));
     }
 }
