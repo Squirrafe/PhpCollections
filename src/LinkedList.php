@@ -100,11 +100,18 @@ class LinkedList extends AbstractIndexedCollection
         return new LinkedList([$value], $this);
     }
 
+    /**
+     * @param Collection<T> $collection
+     * @return LinkedList<T>
+     */
     public function concat(Collection $collection): LinkedList
     {
         return self::with([...$this->toNative(), ...$collection->toNative()]);
     }
 
+    /**
+     * @return Optional<T>
+     */
     public function headOption(): Optional
     {
         if ($this->element === []) {
@@ -114,6 +121,9 @@ class LinkedList extends AbstractIndexedCollection
         return Optional::some($this->element[0]);
     }
 
+    /**
+     * @return LinkedList<T>
+     */
     public function tail(): LinkedList
     {
         if (null === $this->tail) {
@@ -123,6 +133,9 @@ class LinkedList extends AbstractIndexedCollection
         return $this->tail;
     }
 
+    /**
+     * @return T[]
+     */
     public function toNative(): array
     {
         if ($this->tail === null) {
@@ -135,6 +148,10 @@ class LinkedList extends AbstractIndexedCollection
         ];
     }
 
+    /**
+     * @param int $index
+     * @return Optional<T>
+     */
     public function getOption(int $index): Optional
     {
         if ($index < 0) {
@@ -152,6 +169,10 @@ class LinkedList extends AbstractIndexedCollection
         return $this->tail->getOption($index - 1);
     }
 
+    /**
+     * @param int $count
+     * @return LinkedList<T>
+     */
     public function drop(int $count): LinkedList
     {
         if ($count <= 0) {
@@ -161,11 +182,20 @@ class LinkedList extends AbstractIndexedCollection
         return $this->tail->drop($count - 1);
     }
 
-    public function dropRight(int $count): IndexedCollection
+    /**
+     * @param int $count
+     * @return LinkedList<T>
+     */
+    public function dropRight(int $count): LinkedList
     {
         return $this->reverse()->drop($count)->reverse();
     }
 
+    /**
+     * @param T $element
+     * @param int $from
+     * @return int
+     */
     public function indexOf(mixed $element, int $from = 0): int
     {
         if ($this->tail === null) {
@@ -183,6 +213,11 @@ class LinkedList extends AbstractIndexedCollection
         return $indexFromTail + 1;
     }
 
+    /**
+     * @param callable(T): int $filter
+     * @param int $from
+     * @return int
+     */
     public function indexWhere(callable $filter, int $from = 0): int
     {
         if ($this->tail === null) {
@@ -201,6 +236,11 @@ class LinkedList extends AbstractIndexedCollection
         return $indexFromTail + 1;
     }
 
+    /**
+     * @param int $from
+     * @param int $to
+     * @return LinkedList<T>
+     */
     public function slice(int $from, int $to): LinkedList
     {
         if ($to - $from <= 0) {
@@ -217,6 +257,10 @@ class LinkedList extends AbstractIndexedCollection
         );
     }
 
+    /**
+     * @param callable(T,T): int $ordering
+     * @return LinkedList<T>
+     */
     public function sort(callable $ordering): LinkedList
     {
         $elements = $this->toNative();
@@ -224,6 +268,9 @@ class LinkedList extends AbstractIndexedCollection
         return self::with($elements);
     }
 
+    /**
+     * @return LinkedList<T>
+     */
     public function reverse(): LinkedList
     {
         $previous = self::empty();
@@ -239,6 +286,10 @@ class LinkedList extends AbstractIndexedCollection
         return $previous;
     }
 
+    /**
+     * @param int $count
+     * @return LinkedList<T>
+     */
     public function take(int $count): LinkedList
     {
         if ($count <= 0) {
@@ -248,11 +299,19 @@ class LinkedList extends AbstractIndexedCollection
         return new LinkedList($this->element, $this->tail->take($count - 1));
     }
 
+    /**
+     * @param int $count
+     * @return LinkedList<T>
+     */
     public function takeRight(int $count): LinkedList
     {
         return $this->reverse()->take($count)->reverse();
     }
 
+    /**
+     * @param callable(T): bool $filter
+     * @return LinkedList<T>
+     */
     public function takeWhile(callable $filter): LinkedList
     {
         if ($this->tail === null) {
@@ -275,6 +334,10 @@ class LinkedList extends AbstractIndexedCollection
         return $this->tail->getLength() + 1;
     }
 
+    /**
+     * @param callable(T): bool $filter
+     * @return LinkedList<T>
+     */
     public function filter(callable $filter): LinkedList
     {
         if ($this->tail === null) {
@@ -290,6 +353,10 @@ class LinkedList extends AbstractIndexedCollection
         return $tailFiltered;
     }
 
+    /**
+     * @param callable(T): bool $filter
+     * @return LinkedList<T>
+     */
     public function filterNot(callable $filter): LinkedList
     {
         if ($this->tail === null) {
@@ -331,6 +398,11 @@ class LinkedList extends AbstractIndexedCollection
         return $this->tail->forAll($filter);
     }
 
+    /**
+     * @template U
+     * @param callable(T): U $mapper
+     * @return LinkedList<U>
+     */
     public function map(callable $mapper): LinkedList
     {
         if ($this->tail === null) {
@@ -341,6 +413,11 @@ class LinkedList extends AbstractIndexedCollection
         return new LinkedList($mapper($this->element[0]), $tailMapped);
     }
 
+    /**
+     * @template U
+     * @param callable(T): (U|IterableOnce<U>) $mapper
+     * @return LinkedList<U>
+     */
     public function flatMap(callable $mapper): LinkedList
     {
         if ($this->tail === null) {
@@ -360,7 +437,7 @@ class LinkedList extends AbstractIndexedCollection
 
         for ($i = count($elementParts) - 1; $i >= 0; $i--) {
             $part = $elementParts[0];
-            $tailMapped = new LinkedList($part, $tailMapped);
+            $tailMapped = new LinkedList([$part], $tailMapped);
         }
 
         return $tailMapped;

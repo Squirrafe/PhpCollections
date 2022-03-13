@@ -78,21 +78,43 @@ abstract class AbstractCollection implements Collection
         return $optional->get();
     }
 
+    /**
+     * @param callable(T,T): T $operator
+     * @return Optional<T>
+     */
     public function reduceLeftOption(callable $operator): Optional
     {
+        /**
+         * @param Optional<T> $left
+         * @param T $value
+         * @return Optional<T>
+         */
         $functor = function (Optional $left, mixed $value) use ($operator) {
             return $left->map(fn ($v) => $operator($v, $value));
         };
+        /** @var Optional<T> $startValue */
+        $startValue = Optional::none();
 
-        return $this->foldLeft(Optional::none(), $functor);
+        return $this->foldLeft($startValue, $functor);
     }
 
+    /**
+     * @param callable(T,T): T $operator
+     * @return Optional<T>
+     */
     public function reduceRightOption(callable $operator): Optional
     {
+        /**
+         * @param T $value
+         * @param Optional<T> $right
+         * @return Optional<T>
+         */
         $functor = function (mixed $value, Optional $right) use ($operator) {
             return $right->map(fn ($v) => $operator($value, $v));
         };
+        /** @var Optional<T> $startValue */
+        $startValue = Optional::none();
 
-        return $this->foldRight(Optional::none(), $functor);
+        return $this->foldRight($startValue, $functor);
     }
 }
