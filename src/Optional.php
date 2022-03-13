@@ -11,6 +11,8 @@ use Traversable;
  * Constructor of that class is private; objects should be created either by calling `Optional::some($value)` to note
  * presence of element, or `Optional::none()` to note lack of element.
  *
+ * All operations of Optional has a complexity of O(1).
+ *
  * @template T
  * @template-implements IterableOnce<T>
  */
