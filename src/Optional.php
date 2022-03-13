@@ -207,7 +207,7 @@ class Optional implements IterableOnce
         return Optional::some($mappedResult);
     }
 
-    public function foldLeft($startValue, callable $operator)
+    public function foldLeft(mixed $startValue, callable $operator): mixed
     {
         if ($this->isSet) {
             return $operator($startValue, $this->content[0]);
@@ -216,7 +216,7 @@ class Optional implements IterableOnce
         return $startValue;
     }
 
-    public function foldRight($startValue, callable $operator)
+    public function foldRight(mixed $startValue, callable $operator): mixed
     {
         if ($this->isSet) {
             return $operator($this->content[0], $startValue);
@@ -232,7 +232,7 @@ class Optional implements IterableOnce
         }
     }
 
-    public function reduceLeft(callable $operator)
+    public function reduceLeft(callable $operator): mixed
     {
         if ($this->isSet) {
             return $this->content[0];
@@ -246,7 +246,7 @@ class Optional implements IterableOnce
         return $this;
     }
 
-    public function reduceRight(callable $operator)
+    public function reduceRight(callable $operator): mixed
     {
         if ($this->isSet) {
             return $this->content[0];

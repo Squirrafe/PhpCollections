@@ -67,7 +67,7 @@ interface Collection extends IterableOnce
      * ```
      *
      * @return array{T,Collection<T>}
-     * @throws NoSuchElementException if collection is empty
+     * @throws UnsupportedTraversalException if collection is empty
      */
     public function deconstruct(): array;
 
@@ -84,7 +84,6 @@ interface Collection extends IterableOnce
      * ```
      *
      * @return array{Optional<T>,Collection<T>}
-     * @throws NoSuchElementException if collection is empty
      */
     public function deconstructOption(): array;
 

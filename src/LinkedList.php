@@ -1,0 +1,396 @@
+<?php
+
+namespace Squingla\Collections;
+
+/**
+ * Class representing a singly linked list. Each object of linked list is either:
+ * - a terminator - an empty element, representing end of list, or
+ * - an element with single value and a tail - another instance of LinkedList, representing next element.
+ *
+ * Because of such representation, operations on linked list that concern beginning of lists are very fast, but complexity
+ * of other operations grow with list size.
+ *
+ * Because of way linked list work, it can be very optimally used as a stack, with `prepended()` to add new element
+ * to stack, `head()/headOption()` to get current element of stack and `tail()` to remove current element from stack.
+ *
+ * Constructor of that class is private; objects can be created with static methods:
+ * - LinkedList::empty() returns empty list
+ * - LinkedList::with(array $elements) returns list containing all elements from argument, keeping order.
+ *
+ * @template T
+ * @template-extends AbstractIndexedCollection<T>
+ */
+class LinkedList extends AbstractIndexedCollection
+{
+    /** @var T[] */
+    private array $element;
+    /** @var LinkedList<T>|null */
+    private ?LinkedList $tail;
+
+    /**
+     * @param T[] $element
+     * @param LinkedList<T>|null $tail
+     */
+    private function __construct(array $element, ?LinkedList $tail)
+    {
+        $this->element = $element;
+        $this->tail = $tail;
+    }
+
+
+    /**
+     * Creates a list containing all elements from parameter. Has complexity of O(n).
+     *
+     * @template U
+     * @param U[] $elements
+     * @return LinkedList<U>
+     */
+    public static function with(array $elements): LinkedList
+    {
+        /** @var LinkedList<U> $tail */
+        $tail = self::empty();
+        if (count($elements) === 0) {
+            return $tail;
+        }
+
+        for ($i = count($elements) - 1; $i >= 0; $i--) {
+            $tail = new LinkedList([$elements[$i]], $tail);
+        }
+
+        return $tail;
+    }
+
+    /**
+     * Returns empty list.
+     *
+     * @return LinkedList<null>
+     */
+    public static function empty(): LinkedList
+    {
+        return new self([], null);
+    }
+
+    /**
+     * Adds an element to end of current list. Method has a complexity of O(n).
+     *
+     * @param T $value
+     * @return LinkedList<T>
+     */
+    public function appended(mixed $value): LinkedList
+    {
+        if ($this->tail === null) {
+            // current element is a terminator - should be replaced with a new element
+            return new LinkedList([$value], $this);
+        }
+
+        return new LinkedList(
+            $this->element,
+            $this->tail->appended($value),
+        );
+    }
+
+    /**
+     * Adds an element to beginning of current list. Method has a complexity of O(1).
+     *
+     * @param T $value
+     * @return LinkedList<T>
+     */
+    public function prepended(mixed $value): LinkedList
+    {
+        return new LinkedList([$value], $this);
+    }
+
+    public function concat(Collection $collection): LinkedList
+    {
+        return self::with([...$this->toNative(), ...$collection->toNative()]);
+    }
+
+    public function headOption(): Optional
+    {
+        if ($this->element === []) {
+            return Optional::none();
+        }
+
+        return Optional::some($this->element[0]);
+    }
+
+    public function tail(): LinkedList
+    {
+        if (null === $this->tail) {
+            return $this;
+        }
+
+        return $this->tail;
+    }
+
+    public function toNative(): array
+    {
+        if ($this->tail === null) {
+            return [];
+        }
+
+        return [
+            $this->element[0],
+            ...$this->tail->toNative(),
+        ];
+    }
+
+    public function getOption(int $index): Optional
+    {
+        if ($index < 0) {
+            return Optional::none();
+        }
+
+        if ($this->tail === null) {
+            return Optional::none();
+        }
+
+        if ($index === 0) {
+            return Optional::some($this->element[0]);
+        }
+
+        return $this->tail->getOption($index - 1);
+    }
+
+    public function drop(int $count): LinkedList
+    {
+        if ($count <= 0) {
+            return $this;
+        }
+
+        return $this->tail->drop($count - 1);
+    }
+
+    public function dropRight(int $count): IndexedCollection
+    {
+        return $this->reverse()->drop($count)->reverse();
+    }
+
+    public function indexOf(mixed $element, int $from = 0): int
+    {
+        if ($this->tail === null) {
+            return -1;
+        }
+
+        if ($from <= 0 && $element === $this->element[0]) {
+            return 0;
+        }
+
+        $indexFromTail = $this->tail->indexOf($element, $from - 1);
+        if ($indexFromTail === -1) {
+            return -1;
+        }
+        return $indexFromTail + 1;
+    }
+
+    public function indexWhere(callable $filter, int $from = 0): int
+    {
+        if ($this->tail === null) {
+            return -1;
+        }
+
+        if ($from <= 0 && $filter($this->element[0])) {
+            return 0;
+        }
+
+        $indexFromTail = $this->tail->indexWhere($filter, $from - 1);
+        if ($indexFromTail === -1) {
+            return -1;
+        }
+
+        return $indexFromTail + 1;
+    }
+
+    public function slice(int $from, int $to): LinkedList
+    {
+        if ($to - $from <= 0) {
+            return self::empty();
+        }
+
+        if ($from > 0) { // skipping left side
+            return $this->tail->slice($from - 1, $to - 1);
+        }
+
+        return new LinkedList(
+            $this->element,
+            $this->tail->slice(0, $to - 1),
+        );
+    }
+
+    public function sort(callable $ordering): LinkedList
+    {
+        $elements = $this->toNative();
+        usort($elements, $ordering);
+        return self::with($elements);
+    }
+
+    public function reverse(): LinkedList
+    {
+        $previous = self::empty();
+        $current = $this;
+
+        while ($current !== null) {
+            $next = $current->tail;
+            $current = new LinkedList($current->element, $previous);
+            $previous = $current;
+            $current = $next;
+        }
+
+        return $previous;
+    }
+
+    public function take(int $count): LinkedList
+    {
+        if ($count <= 0) {
+            return self::empty();
+        }
+
+        return new LinkedList($this->element, $this->tail->take($count - 1));
+    }
+
+    public function takeRight(int $count): LinkedList
+    {
+        return $this->reverse()->take($count)->reverse();
+    }
+
+    public function takeWhile(callable $filter): LinkedList
+    {
+        if ($this->tail === null) {
+            return $this;
+        }
+
+        if (!$filter($this->element[0])) {
+            return self::empty();
+        }
+
+        return new LinkedList($this->element, $this->tail->takeWhile($filter));
+    }
+
+    public function getLength(): int
+    {
+        if ($this->tail === null) {
+            return -1;
+        }
+
+        return $this->tail->getLength() + 1;
+    }
+
+    public function filter(callable $filter): LinkedList
+    {
+        if ($this->tail === null) {
+            return $this;
+        }
+
+        $tailFiltered = $this->tail->filter($filter);
+
+        if ($filter($this->element[0])) {
+            return new LinkedList($this->element, $tailFiltered);
+        }
+
+        return $tailFiltered;
+    }
+
+    public function filterNot(callable $filter): LinkedList
+    {
+        if ($this->tail === null) {
+            return $this;
+        }
+
+        $tailFiltered = $this->tail->filterNot($filter);
+
+        if (!$filter($this->element[0])) {
+            return new LinkedList($this->element, $tailFiltered);
+        }
+
+        return $tailFiltered;
+    }
+
+    public function exists(callable $filter): bool
+    {
+        if ($this->tail === null) {
+            return false;
+        }
+
+        if ($filter($this->element[0])) {
+            return true;
+        }
+
+        return $this->tail->exists($filter);
+    }
+
+    public function forAll(callable $filter): bool
+    {
+        if ($this->tail === null) {
+            return true;
+        }
+
+        if (!$filter($this->element[0])) {
+            return false;
+        }
+
+        return $this->tail->forAll($filter);
+    }
+
+    public function map(callable $mapper): LinkedList
+    {
+        if ($this->tail === null) {
+            return $this;
+        }
+
+        $tailMapped = $this->tail->map($mapper);
+        return new LinkedList($mapper($this->element[0]), $tailMapped);
+    }
+
+    public function flatMap(callable $mapper): LinkedList
+    {
+        if ($this->tail === null) {
+            return $this;
+        }
+
+        $tailMapped = $this->tail->flatMap($mapper);
+        $elementMapped = $mapper($this->element[0]);
+        if (!$elementMapped instanceof IterableOnce) {
+            return new LinkedList($elementMapped, $tailMapped);
+        }
+
+        $elementParts = [];
+        foreach ($elementMapped as $elementPart) {
+            $elementParts[] = $elementPart;
+        }
+
+        for ($i = count($elementParts) - 1; $i >= 0; $i--) {
+            $part = $elementParts[0];
+            $tailMapped = new LinkedList($part, $tailMapped);
+        }
+
+        return $tailMapped;
+    }
+
+    public function foldLeft(mixed $startValue, callable $operator): mixed
+    {
+        if ($this->tail === null) {
+            return $startValue;
+        }
+
+        return $this->tail->foldLeft($operator($startValue, $this->element[0]), $operator);
+    }
+
+    public function foldRight(mixed $startValue, callable $operator): mixed
+    {
+        if ($this->tail === null) {
+            return $startValue;
+        }
+
+        return $operator($this->element[0], $this->tail->foldRight($startValue, $operator));
+    }
+
+    public function forEach(callable $consumer): void
+    {
+        if ($this->tail === null) {
+            return;
+        }
+
+        $consumer($this->element[0]);
+        $this->tail->forEach($consumer);
+    }
+}
