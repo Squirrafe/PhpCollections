@@ -63,7 +63,7 @@ interface Collection extends IterableOnce
      * ```
      * if equivalent of
      * ```
-     * $array = [$collection->head(), $collection->tail()];
+     * $array = [ $collection->head(), $collection->tail() ];
      * ```
      *
      * @return array{T,Collection<T>}
