@@ -142,4 +142,20 @@ interface IndexedCollection extends Collection
      * @return IndexedCollection<T>
      */
     public function takeWhile(callable $filter): IndexedCollection;
+
+    /**
+     * Creates a new, empty collection.
+     *
+     * @return IndexedCollection<null>
+     */
+    public static function empty(): IndexedCollection;
+
+    /**
+     * Creates a new instance of collection with given elements.
+     *
+     * @template U
+     * @param U[] $elements
+     * @return IndexedCollection<U>
+     */
+    public static function with(array $elements): IndexedCollection;
 }

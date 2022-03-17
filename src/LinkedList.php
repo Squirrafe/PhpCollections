@@ -157,14 +157,14 @@ class LinkedList extends AbstractIndexedCollection
     public function getOption(int $index): Optional
     {
         if ($index < 0) {
-            /** @var LinkedList<T> $empty */
-            $empty = self::empty();
+            /** @var Optional<T> $empty */
+            $empty = Optional::none();
             return $empty;
         }
 
         if ($this->tail === null) {
-            /** @var LinkedList<T> $empty */
-            $empty = self::empty();
+            /** @var Optional<T> $empty */
+            $empty = Optional::none();
             return $empty;
         }
 
@@ -181,7 +181,7 @@ class LinkedList extends AbstractIndexedCollection
      */
     public function drop(int $count): LinkedList
     {
-        if ($count <= 0) {
+        if ($count <= 0 || $this->tail === null) {
             return $this;
         }
 
@@ -220,7 +220,7 @@ class LinkedList extends AbstractIndexedCollection
     }
 
     /**
-     * @param callable(T): int $filter
+     * @param callable(T): bool $filter
      * @param int $from
      * @return int
      */
@@ -249,7 +249,7 @@ class LinkedList extends AbstractIndexedCollection
      */
     public function slice(int $from, int $to): LinkedList
     {
-        if ($to - $from <= 0) {
+        if ($to - $from <= 0 || $this->tail === null) {
             /** @var LinkedList<T> $empty */
             $empty = self::empty();
             return $empty;
@@ -281,17 +281,15 @@ class LinkedList extends AbstractIndexedCollection
      */
     public function reverse(): LinkedList
     {
-        $previous = self::empty();
-        $current = $this;
+        /** @var LinkedList<T> $tail */
+        $tail = self::empty();
+        $this->forEach(
+            function ($element) use (&$tail) {
+                $tail = new LinkedList([$element], $tail);
+            }
+        );
 
-        while ($current !== null) {
-            $next = $current->tail;
-            $current = new LinkedList($current->element, $previous);
-            $previous = $current;
-            $current = $next;
-        }
-
-        return $previous;
+        return $tail;
     }
 
     /**
@@ -300,7 +298,7 @@ class LinkedList extends AbstractIndexedCollection
      */
     public function take(int $count): LinkedList
     {
-        if ($count <= 0) {
+        if ($count <= 0 || $this->tail === null) {
             /** @var LinkedList<T> $empty */
             $empty = self::empty();
             return $empty;

@@ -28,5 +28,4 @@ abstract class AbstractIndexedCollection extends AbstractCollection implements I
             $this->drop($index),
         ];
     }
-
 }

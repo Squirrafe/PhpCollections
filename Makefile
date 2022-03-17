@@ -1,8 +1,8 @@
 up:
-	docker-compose run php composer install
+	docker-compose run --rm php composer install
 
 phpunit:
-	docker-compose run php vendor/bin/phpunit
+	docker-compose run --rm php vendor/bin/phpunit
 
 phpstan:
-	docker-compose run php vendor/bin/phpstan analyze
+	docker-compose run --rm php vendor/bin/phpstan analyze

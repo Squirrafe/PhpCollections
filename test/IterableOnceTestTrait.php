@@ -3,19 +3,19 @@
 namespace Squingla\Test\Collections;
 
 use PHPUnit\Framework\TestCase;
-use Squingla\Collections\AbstractIndexedCollection;
 use Squingla\Collections\IterableOnce;
 use Squingla\Collections\UnsupportedTraversalException;
 
 trait IterableOnceTestTrait
 {
+    use TestTrait;
+
     /**
      * @template T
      * @param T[] $elements
-     * @return AbstractIndexedCollection<T>
+     * @return IterableOnce<T>
      */
     protected abstract function getInstanceWithElements(array $elements): IterableOnce;
-    protected abstract function getTestInstance(): TestCase;
 
     public function testGetLength(): void
     {

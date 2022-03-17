@@ -8,7 +8,7 @@ use Squingla\Collections\LinkedList;
 
 class LinkedListTest extends TestCase
 {
-    use IterableOnceTestTrait;
+    use IndexedCollectionTestTrait;
 
     /**
      * @template T
