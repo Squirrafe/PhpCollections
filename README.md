@@ -5,7 +5,6 @@ Collections library for PHP, inspired by Scala.
 ### Features
 
 Planned features:
-- Array lists
 - Queues and stacks
 - Dictionaries - collections that allow indexing by values of any types
   - ArrayDictionary - simplest, most universal, but also slowest dictionary
@@ -59,13 +58,11 @@ echo $newList->get(1); // "John Doe"
 echo $newList->get(2); // "Jane Smith"
 ```
 
-Currently, `LinkedList` is the only implementation of `IndexedCollection`. It stores elements in a
-[singly linked list](https://en.wikipedia.org/wiki/Linked_list), which means that every `LinkedList` object is either:
-- an empty list (a terminator), or
-- a node, containing a single element of a list and a reference to next `LinkedList`.
-
-That implementation allows for fast operations on the beginning of list, but slowing down linearly as operation moves
-to the end of a list.
+Currently, there are two implementations of `IndexedCollection`:
+- `ArrayList`, that stores elements in native PHP array.
+- `LinkedList`, that stores elements in a [singly linked list structure](https://en.wikipedia.org/wiki/Linked_list).
+  That implementation allows for fast operations on the beginning of list, but slowing down linearly as operation moves
+  to the end of a list.
 
 ### Development
 
