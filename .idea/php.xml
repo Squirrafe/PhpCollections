@@ -103,6 +103,11 @@
     </phpInfoCache>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
+  <component name="PhpStan">
+    <PhpStan_settings>
+      <PhpStanConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />
+    </PhpStan_settings>
+  </component>
   <component name="PhpUnit">
     <phpunit_settings>
       <phpunit_by_interpreter interpreter_id="d22e72cf-ab8e-41c1-8531-c8a7f8ada04e" configuration_file_path="phpunit.xml.dist" custom_loader_path="vendor/autoload.php" phpunit_phar_path="" use_configuration_file="true" />

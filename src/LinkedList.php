@@ -328,7 +328,7 @@ class LinkedList extends AbstractIndexedCollection
     public function getLength(): int
     {
         if ($this->tail === null) {
-            return -1;
+            return 0;
         }
 
         return $this->tail->getLength() + 1;
