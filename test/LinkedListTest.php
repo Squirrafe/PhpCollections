@@ -10,6 +10,11 @@ class LinkedListTest extends TestCase
 {
     use IterableOnceTestTrait;
 
+    /**
+     * @template T
+     * @param T[] $elements
+     * @return AbstractIndexedCollection<T>
+     */
     protected function getInstanceWithElements(array $elements): AbstractIndexedCollection
     {
         return LinkedList::with($elements);

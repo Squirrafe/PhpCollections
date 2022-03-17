@@ -120,6 +120,7 @@ trait IterableOnceTestTrait
 
     public function testFoldLeftEmpty(): void
     {
+        /** @var IterableOnce<int> $instance */
         $instance = $this->getInstanceWithElements([]);
         $folded = $instance->foldLeft(33, fn (int $a, int $b) => $a - $b);
         TestCase::assertSame(33, $folded);
@@ -134,6 +135,7 @@ trait IterableOnceTestTrait
 
     public function testFoldRightEmpty(): void
     {
+        /** @var IterableOnce<int> $instance */
         $instance = $this->getInstanceWithElements([]);
         $folded = $instance->foldRight(33, fn (int $a, int $b) => $a - $b);
         TestCase::assertSame(33, $folded);
@@ -154,6 +156,7 @@ trait IterableOnceTestTrait
 
     public function testForEachEmpty(): void
     {
+        /** @var IterableOnce<int> $instance */
         $instance = $this->getInstanceWithElements([]);
         $collected = [];
         $instance->forEach(
@@ -166,6 +169,7 @@ trait IterableOnceTestTrait
 
     public function reduceLeft(): void
     {
+        /** @var IterableOnce<int> $instance */
         $instance = $this->getInstanceWithElements([5, 1, 8, 3]);
         $reduced = $instance->reduceLeft(fn (int $a, int $b) => $a - $b);
         TestCase::assertSame(((5 - 1) - 8) - 3, $reduced);
@@ -173,6 +177,7 @@ trait IterableOnceTestTrait
 
     public function reduceRight(): void
     {
+        /** @var IterableOnce<int> $instance */
         $instance = $this->getInstanceWithElements([5, 1, 8, 3]);
         $reduced = $instance->reduceRight(fn (int $a, int $b) => $a - $b);
         TestCase::assertSame(5 - (1 - (8 - 3)), $reduced);
@@ -180,6 +185,7 @@ trait IterableOnceTestTrait
 
     public function reduceLeftOption(): void
     {
+        /** @var IterableOnce<int> $instance */
         $instance = $this->getInstanceWithElements([5, 1, 8, 3]);
         $reduced = $instance->reduceLeftOption(fn (int $a, int $b) => $a - $b);
         TestCase::assertSame(((5 - 1) - 8) - 3, $reduced->getOrNull());
@@ -187,6 +193,7 @@ trait IterableOnceTestTrait
 
     public function reduceRightOption(): void
     {
+        /** @var IterableOnce<int> $instance */
         $instance = $this->getInstanceWithElements([5, 1, 8, 3]);
         $reduced = $instance->reduceRightOption(fn (int $a, int $b) => $a - $b);
         TestCase::assertSame(5 - (1 - (8 - 3)), $reduced->getOrNull());
@@ -194,6 +201,7 @@ trait IterableOnceTestTrait
 
     public function reduceLeftEmpty(): void
     {
+        /** @var IterableOnce<int> $instance */
         $instance = $this->getInstanceWithElements([]);
         $this->getTestInstance()->expectException(UnsupportedTraversalException::class);
         $instance->reduceLeft(fn (int $a, int $b) => $a - $b);
@@ -201,6 +209,7 @@ trait IterableOnceTestTrait
 
     public function reduceRightEmpty(): void
     {
+        /** @var IterableOnce<int> $instance */
         $instance = $this->getInstanceWithElements([]);
         $this->getTestInstance()->expectException(UnsupportedTraversalException::class);
         $instance->reduceRight(fn (int $a, int $b) => $a - $b);
@@ -208,6 +217,7 @@ trait IterableOnceTestTrait
 
     public function reduceLeftOptionEmpty(): void
     {
+        /** @var IterableOnce<int> $instance */
         $instance = $this->getInstanceWithElements([]);
         $reduced = $instance->reduceLeftOption(fn (int $a, int $b) => $a - $b);
         TestCase::assertTrue($reduced->isEmpty());
@@ -215,6 +225,7 @@ trait IterableOnceTestTrait
 
     public function reduceRightOptionEmpty(): void
     {
+        /** @var IterableOnce<int> $instance */
         $instance = $this->getInstanceWithElements([]);
         $reduced = $instance->reduceRightOption(fn (int $a, int $b) => $a - $b);
         TestCase::assertTrue($reduced->isEmpty());

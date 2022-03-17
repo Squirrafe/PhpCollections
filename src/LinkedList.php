@@ -415,7 +415,7 @@ class LinkedList extends AbstractIndexedCollection
 
     /**
      * @template U
-     * @param callable(T): (U|IterableOnce<U>) $mapper
+     * @param callable(T): IterableOnce<U> $mapper
      * @return LinkedList<U>
      */
     public function flatMap(callable $mapper): LinkedList
@@ -424,12 +424,11 @@ class LinkedList extends AbstractIndexedCollection
             return $this;
         }
 
+        /** @var LinkedList<U> $tailMapped */
         $tailMapped = $this->tail->flatMap($mapper);
-        $elementMapped = $mapper($this->element[0]);
-        if (!$elementMapped instanceof IterableOnce) {
-            return new LinkedList($elementMapped, $tailMapped);
-        }
 
+        /** @var IterableOnce<U> $elementMapped */
+        $elementMapped = $mapper($this->element[0]);
         $elementParts = [];
         foreach ($elementMapped as $elementPart) {
             $elementParts[] = $elementPart;
@@ -437,6 +436,7 @@ class LinkedList extends AbstractIndexedCollection
 
         for ($i = count($elementParts) - 1; $i >= 0; $i--) {
             $part = $elementParts[$i];
+            /** @var LinkedList<U> $tailMapped */
             $tailMapped = new LinkedList([$part], $tailMapped);
         }
 
