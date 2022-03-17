@@ -410,7 +410,7 @@ class LinkedList extends AbstractIndexedCollection
         }
 
         $tailMapped = $this->tail->map($mapper);
-        return new LinkedList($mapper($this->element[0]), $tailMapped);
+        return new LinkedList([$mapper($this->element[0])], $tailMapped);
     }
 
     /**
@@ -436,7 +436,7 @@ class LinkedList extends AbstractIndexedCollection
         }
 
         for ($i = count($elementParts) - 1; $i >= 0; $i--) {
-            $part = $elementParts[0];
+            $part = $elementParts[$i];
             $tailMapped = new LinkedList([$part], $tailMapped);
         }
 
@@ -469,5 +469,15 @@ class LinkedList extends AbstractIndexedCollection
 
         $consumer($this->element[0]);
         $this->tail->forEach($consumer);
+    }
+
+    public function isEmpty(): bool
+    {
+        return $this->tail === null;
+    }
+
+    public function nonEmpty(): bool
+    {
+        return $this->tail !== null;
     }
 }

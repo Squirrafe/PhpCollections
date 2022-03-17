@@ -45,12 +45,12 @@ abstract class AbstractCollection implements Collection
 
     public function isEmpty(): bool
     {
-        return $this->getLength() > 0;
+        return $this->getLength() === 0;
     }
 
     public function nonEmpty(): bool
     {
-        return $this->getLength() === 0;
+        return $this->getLength() > 0;
     }
 
     public function count(callable $filter): int
