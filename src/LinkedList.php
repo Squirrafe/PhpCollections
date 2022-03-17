@@ -115,7 +115,9 @@ class LinkedList extends AbstractIndexedCollection
     public function headOption(): Optional
     {
         if ($this->element === []) {
-            return Optional::none();
+            /** @var Optional<T> $none */
+            $none = Optional::none();
+            return $none;
         }
 
         return Optional::some($this->element[0]);
@@ -155,11 +157,15 @@ class LinkedList extends AbstractIndexedCollection
     public function getOption(int $index): Optional
     {
         if ($index < 0) {
-            return Optional::none();
+            /** @var LinkedList<T> $empty */
+            $empty = self::empty();
+            return $empty;
         }
 
         if ($this->tail === null) {
-            return Optional::none();
+            /** @var LinkedList<T> $empty */
+            $empty = self::empty();
+            return $empty;
         }
 
         if ($index === 0) {
@@ -244,7 +250,9 @@ class LinkedList extends AbstractIndexedCollection
     public function slice(int $from, int $to): LinkedList
     {
         if ($to - $from <= 0) {
-            return self::empty();
+            /** @var LinkedList<T> $empty */
+            $empty = self::empty();
+            return $empty;
         }
 
         if ($from > 0) { // skipping left side
@@ -293,7 +301,9 @@ class LinkedList extends AbstractIndexedCollection
     public function take(int $count): LinkedList
     {
         if ($count <= 0) {
-            return self::empty();
+            /** @var LinkedList<T> $empty */
+            $empty = self::empty();
+            return $empty;
         }
 
         return new LinkedList($this->element, $this->tail->take($count - 1));
@@ -319,7 +329,9 @@ class LinkedList extends AbstractIndexedCollection
         }
 
         if (!$filter($this->element[0])) {
-            return self::empty();
+            /** @var LinkedList<T> $empty */
+            $empty = self::empty();
+            return $empty;
         }
 
         return new LinkedList($this->element, $this->tail->takeWhile($filter));
