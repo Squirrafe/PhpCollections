@@ -10,6 +10,7 @@ Planned features:
 - Dictionaries - collections that allow indexing by values of any types
   - ArrayDictionary - simplest, most universal, but also slowest dictionary
   - SortedDictionary - for keys that are comparable, keeps dictionary sorted by key
+- Lazy collections (for example for chained `filter`, `map` etc.)
 
 
 #### Optional
