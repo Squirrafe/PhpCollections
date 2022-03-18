@@ -86,7 +86,7 @@ class ArrayList extends AbstractIndexedCollection
      * @param int $index
      * @return Optional<T>
      */
-    public function getOption(int $index): Optional
+    public function getOption(mixed $index): Optional
     {
         if ($index < 0 || $index >= count($this->content)) {
             /** @var Optional<T> $empty */
@@ -142,7 +142,8 @@ class ArrayList extends AbstractIndexedCollection
      */
     public function indexOf(mixed $element, int $from = 0): int
     {
-        for ($i = max(0, $from); $i < count($this->content); $i++) {
+        $count = count($this->content);
+        for ($i = max(0, $from); $i < $count; $i++) {
             if ($this->content[$i] === $element) {
                 return $i;
             }
@@ -157,7 +158,8 @@ class ArrayList extends AbstractIndexedCollection
      */
     public function indexWhere(callable $filter, int $from = 0): int
     {
-        for ($i = max(0, $from); $i < count($this->content); $i++) {
+        $count = count($this->content);
+        for ($i = max(0, $from); $i < $count; $i++) {
             if ($filter($this->content[$i])) {
                 return $i;
             }
@@ -243,8 +245,7 @@ class ArrayList extends AbstractIndexedCollection
     {
         /** @var T[] $elements */
         $elements = [];
-        for ($i = 0; $i < count($this->content); $i++) {
-            $element = $this->content[$i];
+        foreach ($this->content as $element) {
             if (!$filter($element)) {
                 break;
             }

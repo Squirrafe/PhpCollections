@@ -2,36 +2,16 @@
 
 namespace Squingla\Collections;
 
-use ArrayAccess;
-
 /**
  * Interface for all collections that use integers as an index. In such collections, first element has index = 0, second
  * has index = 1, etc.
  *
  * @template T
  * @template-extends Collection<T>
- * @template-extends ArrayAccess<int,T>
+ * @template-extends CollectionWithKey<int,T>
  */
-interface IndexedCollection extends Collection, ArrayAccess
+interface IndexedCollection extends Collection, CollectionWithKey
 {
-    /**
-     * Returns element of collection under given index. Throws exception if index does not exist in collection.
-     *
-     * @param int $index
-     * @return T
-     * @throws NoSuchElementException if given index does not exist in array
-     */
-    public function get(int $index): mixed;
-
-    /**
-     * Returns optional containing an element of collection under given index. If index does not exist in collection,
-     * returns empty optional.
-     *
-     * @param int $index
-     * @return Optional<T>
-     */
-    public function getOption(int $index): Optional;
-
     /**
      * Returns collection containing all elements except first $count elements from left. If $count is negative or equal
      * to zero, returns this collection. If $count is equal or larger than length of collection, returns empty collection.
@@ -145,16 +125,6 @@ interface IndexedCollection extends Collection, ArrayAccess
      * @return IndexedCollection<T>
      */
     public function takeWhile(callable $filter): IndexedCollection;
-
-    /**
-     * Returns element under chosen index. Behaviour of this method is identical to `get()`, but allows for passing
-     * indexed collections as a int->T callables.
-     *
-     * @param int $index
-     * @return T
-     * @throws NoSuchElementException
-     */
-    public function __invoke(int $index): mixed;
 
     /**
      * Creates a new, empty collection.

@@ -11,7 +11,12 @@ namespace Squingla\Collections;
  */
 abstract class AbstractIndexedCollection extends AbstractCollection implements IndexedCollection
 {
-    public function get(int $index): mixed
+    /**
+     * @param int $index
+     * @return T
+     * @throws NoSuchElementException
+     */
+    public function get(mixed $index): mixed
     {
         $optional = $this->getOption($index);
         if ($optional->nonEmpty()) {
@@ -72,7 +77,7 @@ abstract class AbstractIndexedCollection extends AbstractCollection implements I
      * @param int $index
      * @return T
      */
-    public function __invoke(int $index): mixed
+    public function __invoke(mixed $index): mixed
     {
         return $this->get($index);
     }

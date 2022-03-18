@@ -2,35 +2,16 @@
 
 namespace Squingla\Collections;
 
-use ArrayAccess;
-use PhpParser\Node\Expr\Variable;
-
 /**
  * Interface for all collections that use tuples as a values. Tuple keys must be unique in a dictionary.
  *
  * @template K
  * @template V
  * @template-extends Collection<Tuple<K,V>>
- * @template-extends ArrayAccess<K,V>
+ * @template-extends CollectionWithKey<K,V>
  */
-interface Dictionary extends Collection, ArrayAccess
+interface Dictionary extends Collection, CollectionWithKey
 {
-    /**
-     * Returns element of collection with given key. If key does not exist, throws exception.
-     *
-     * @param K $key
-     * @return V
-     * @throws NoSuchElementException if given key does not have a value
-     */
-    public function get(mixed $key): mixed;
-
-    /**
-     * Returns optional containing element of collection with given key. If key does not exist, returns empty optional.
-     * @param K $key
-     * @return Optional<V>
-     */
-    public function getOption(mixed $key): Optional;
-
     /**
      * If given key does not exist in current dictionary, returns a new dictionary containing all elements of current
      * dictionary with new tuple containing key-value pair. Otherwise, returns this dictionary without change.
@@ -75,16 +56,6 @@ interface Dictionary extends Collection, ArrayAccess
      * @return bool
      */
     public function hasValue(mixed $value): bool;
-
-    /**
-     * Returns element under chosen key. Behaviour of this method is identical to `get()`, but allows for passing
-     * indexed collections as a K->V callables.
-     *
-     * @param K $key
-     * @return V
-     * @throws NoSuchElementException
-     */
-    public function __invoke(mixed $key): mixed;
 
     /**
      * Returns an empty dictionary.
