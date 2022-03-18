@@ -90,7 +90,9 @@ abstract class AbstractCollection implements Collection
          * @return Optional<T>
          */
         $functor = function (Optional $left, mixed $value) use ($operator) {
-            return $left->map(fn ($v) => $operator($v, $value));
+            return $left->isEmpty()
+                ? Optional::some($value)
+                : $left->map(fn ($v) => $operator($v, $value));
         };
         /** @var Optional<T> $startValue */
         $startValue = Optional::none();
@@ -110,7 +112,9 @@ abstract class AbstractCollection implements Collection
          * @return Optional<T>
          */
         $functor = function (mixed $value, Optional $right) use ($operator) {
-            return $right->map(fn ($v) => $operator($value, $v));
+            return $right->isEmpty()
+                ? Optional::some($value)
+                : $right->map(fn ($v) => $operator($value, $v));
         };
         /** @var Optional<T> $startValue */
         $startValue = Optional::none();
