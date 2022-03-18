@@ -67,4 +67,13 @@ abstract class AbstractIndexedCollection extends AbstractCollection implements I
     {
         throw new ImmutableException("Cannot call offsetUnset method on immutable collection.");
     }
+
+    /**
+     * @param int $index
+     * @return T
+     */
+    public function __invoke(int $index): mixed
+    {
+        return $this->get($index);
+    }
 }

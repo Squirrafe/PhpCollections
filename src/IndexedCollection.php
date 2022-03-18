@@ -147,6 +147,16 @@ interface IndexedCollection extends Collection, ArrayAccess
     public function takeWhile(callable $filter): IndexedCollection;
 
     /**
+     * Returns element under chosen index. Behaviour of this method is identical to `get()`, but allows for passing
+     * indexed collections as a int->T callables.
+     *
+     * @param int $index
+     * @return T
+     * @throws NoSuchElementException
+     */
+    public function __invoke(int $index): mixed;
+
+    /**
      * Creates a new, empty collection.
      *
      * @return IndexedCollection<null>

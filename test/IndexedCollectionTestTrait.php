@@ -61,12 +61,26 @@ trait IndexedCollectionTestTrait
         TestCase::assertSame($value, $instance[$index]);
     }
 
+    /**
+     * @dataProvider testGetDataProvider
+     * @param int[] $input
+     */
+    public function testInvoke(
+        array $input,
+        int $index,
+        int $value,
+    ): void {
+        $instance = $this->getInstanceWithElements($input);
+        TestCase::assertSame($value, $instance($index));
+    }
+
     private function testGetDataProvider(): iterable
     {
-        yield [[3, 1, 8, 5], 0, 3];
-        yield [[3, 1, 8, 5], 1, 1];
-        yield [[3, 1, 8, 5], 2, 8];
-        yield [[3, 1, 8, 5], 3, 5];
+        yield [[3, 1, 8, 5, 7], 0, 3];
+        yield [[3, 1, 8, 5, 7], 1, 1];
+        yield [[3, 1, 8, 5, 7], 2, 8];
+        yield [[3, 1, 8, 5, 7], 3, 5];
+        yield [[3, 1, 8, 5, 7], 4, 7];
     }
 
     public function testGetInvalidIndex(): void
