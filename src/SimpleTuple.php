@@ -16,8 +16,8 @@ class SimpleTuple implements Tuple
      * @param V $value
      */
     public function __construct(
-        private readonly mixed $key,
-        private readonly mixed $value,
+        private mixed $key,
+        private mixed $value,
     ) {}
 
     /**

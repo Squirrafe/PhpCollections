@@ -12,7 +12,7 @@ namespace Squingla\Collections;
 class ArrayDictionary extends AbstractDictionary
 {
     /** @var ArrayList<Tuple<K,V>> */
-    private readonly ArrayList $tuplesList;
+    private ArrayList $tuplesList;
 
     /**
      * @param ArrayList<Tuple<K,V>> $tuplesList
