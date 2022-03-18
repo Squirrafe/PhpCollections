@@ -3,7 +3,6 @@
 namespace Squingla\Test\Collections;
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Runner\TestListenerAdapter;
 use Squingla\Collections\IndexedCollection;
 use Squingla\Collections\NoSuchElementException;
 
