@@ -18,14 +18,55 @@ trait IndexedCollectionTestTrait
      */
     protected abstract function getInstanceWithElements(array $elements): IndexedCollection;
 
-    public function testGet(): void
-    {
+    /**
+     * @dataProvider testGetDataProvider
+     * @param int[] $input
+     */
+    public function testGet(
+        array $input,
+        int $index,
+        int $value,
+    ): void {
         /** @var IndexedCollection<int> $instance */
-        $instance = $this->getInstanceWithElements([3, 1, 8, 5]);
-        TestCase::assertSame(3, $instance->get(0));
-        TestCase::assertSame(1, $instance->get(1));
-        TestCase::assertSame(8, $instance->get(2));
-        TestCase::assertSame(5, $instance->get(3));
+        $instance = $this->getInstanceWithElements($input);
+        TestCase::assertSame($value, $instance->get($index));
+    }
+
+    /**
+     * @dataProvider testGetDataProvider
+     * @param int[] $input
+     */
+    public function testGetOption(
+        array $input,
+        int $index,
+        int $value,
+    ): void {
+        /** @var IndexedCollection<int> $instance */
+        $instance = $this->getInstanceWithElements($input);
+        TestCase::assertTrue($instance->getOption($index)->nonEmpty());
+        TestCase::assertSame($value, $instance->getOption($index)->getOrNull());
+    }
+
+    /**
+     * @dataProvider testGetDataProvider
+     * @param int[] $input
+     */
+    public function testArrayAccess(
+        array $input,
+        int $index,
+        int $value,
+    ): void {
+        $instance = $this->getInstanceWithElements($input);
+        TestCase::assertTrue(isset($instance[$index]));
+        TestCase::assertSame($value, $instance[$index]);
+    }
+
+    private function testGetDataProvider(): iterable
+    {
+        yield [[3, 1, 8, 5], 0, 3];
+        yield [[3, 1, 8, 5], 1, 1];
+        yield [[3, 1, 8, 5], 2, 8];
+        yield [[3, 1, 8, 5], 3, 5];
     }
 
     public function testGetInvalidIndex(): void
@@ -42,16 +83,6 @@ trait IndexedCollectionTestTrait
         $instance = $this->getInstanceWithElements([3, 1, 8, 5]);
         $this->expectException(NoSuchElementException::class);
         $instance->get(15);
-    }
-
-    public function testGetOption(): void
-    {
-        /** @var IndexedCollection<int> $instance */
-        $instance = $this->getInstanceWithElements([3, 1, 8, 5]);
-        TestCase::assertSame(3, $instance->getOption(0)->getOrNull());
-        TestCase::assertSame(1, $instance->getOption(1)->getOrNull());
-        TestCase::assertSame(8, $instance->getOption(2)->getOrNull());
-        TestCase::assertSame(5, $instance->getOption(3)->getOrNull());
     }
 
     public function testGetOptionInvalidIndex(): void

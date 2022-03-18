@@ -2,14 +2,17 @@
 
 namespace Squingla\Collections;
 
+use ArrayAccess;
+
 /**
  * Interface for all collections that use integers as an index. In such collections, first element has index = 0, second
  * has index = 1, etc.
  *
  * @template T
  * @template-extends Collection<T>
+ * @template-extends ArrayAccess<int,T>
  */
-interface IndexedCollection extends Collection
+interface IndexedCollection extends Collection, ArrayAccess
 {
     /**
      * Returns element of collection under given index. Throws exception if index does not exist in collection.
