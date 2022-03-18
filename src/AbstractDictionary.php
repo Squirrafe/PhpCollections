@@ -61,6 +61,38 @@ abstract class AbstractDictionary extends AbstractCollection implements Dictiona
     }
 
     /**
+     * @param Tuple<K,V> $value
+     * @return Dictionary<K,V>
+     */
+    public function appended(mixed $value): Dictionary
+    {
+        return $this->put($value->getKey(), $value->getValue());
+    }
+
+    /**
+     * @param Tuple<K,V> $value
+     * @return Dictionary<K,V>
+     */
+    public function prepended(mixed $value): Dictionary
+    {
+        return $this->put($value->getKey(), $value->getValue());
+    }
+
+    /**
+     * @param K $key
+     * @return V
+     * @throws NoSuchElementException
+     */
+    public function get(mixed $key): mixed
+    {
+        $optional = $this->getOption($key);
+        if ($optional->isEmpty()) {
+            throw new NoSuchElementException("There is no value under given key");
+        }
+        return $optional->get();
+    }
+
+    /**
      * @param K $key
      * @param V $value
      * @return Dictionary<K,V>
