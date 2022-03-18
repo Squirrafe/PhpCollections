@@ -13,15 +13,7 @@ use function PHPUnit\Framework\assertTrue;
 
 trait DictionaryIterableOnceTestTrait
 {
-    use TestTrait;
-
-    /**
-     * @template K
-     * @template V
-     * @param array{K,V}[] $elements
-     * @return Dictionary<K,V>
-     */
-    protected abstract function getInstanceWithElements(array $elements): Dictionary;
+    use DictionaryTestTrait;
 
     /** @dataProvider basicDataProvider */
     public function testGetLength(array $elements): void

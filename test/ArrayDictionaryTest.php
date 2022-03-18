@@ -9,7 +9,8 @@ use Squingla\Collections\SimpleTuple;
 
 class ArrayDictionaryTest extends TestCase
 {
-    use DictionaryTestTrait;
+    use DictionaryIterableOnceTestTrait;
+    use DictionaryCollectionTestTrait;
 
     protected function getInstanceWithElements(array $elements): Dictionary
     {
