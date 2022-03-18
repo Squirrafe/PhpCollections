@@ -41,7 +41,7 @@ trait DictionaryCollectionTestTrait
         }
     }
 
-    private function addingDataProvider(): iterable
+    public function addingDataProvider(): iterable
     {
         yield [
             'input' => [
@@ -92,7 +92,7 @@ trait DictionaryCollectionTestTrait
         }
     }
 
-    private function concatDataProvider(): iterable
+    public function concatDataProvider(): iterable
     {
         yield [
             'input1' => [
@@ -289,7 +289,7 @@ trait DictionaryCollectionTestTrait
         }
     }
 
-    private function deconstructingDataProvider(): iterable
+    public function deconstructingDataProvider(): iterable
     {
         yield ['input' => [
             ['key1', 'value1'],

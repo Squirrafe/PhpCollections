@@ -53,7 +53,7 @@ trait DictionaryIterableOnceTestTrait
         }
     }
 
-    private function basicDataProvider(): iterable
+    public function basicDataProvider(): iterable
     {
         yield ['input' => [
             ['key1', 'value1'],
@@ -109,7 +109,7 @@ trait DictionaryIterableOnceTestTrait
      * - filter lambda
      * - expected result
      */
-    private function filterDataProvider(): iterable
+    public function filterDataProvider(): iterable
     {
         yield [
             [
@@ -166,7 +166,7 @@ trait DictionaryIterableOnceTestTrait
      * - filter lambda
      * - expected result
      */
-    private function filterNotDataProvider(): iterable
+    public function filterNotDataProvider(): iterable
     {
         yield [
             [
@@ -221,7 +221,7 @@ trait DictionaryIterableOnceTestTrait
         self::assertSame($forAll, $instance->forAll($lambda));
     }
 
-    private function existsDataProvider(): iterable
+    public function existsDataProvider(): iterable
     {
         yield [
             [
@@ -418,7 +418,7 @@ trait DictionaryIterableOnceTestTrait
         }
     }
 
-    private function reduceDataProvider(): iterable
+    public function reduceDataProvider(): iterable
     {
         yield [
             'input' => [

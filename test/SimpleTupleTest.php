@@ -39,7 +39,7 @@ class SimpleTupleTest extends TestCase
         self::assertSame($value, $tuple->getValue());
     }
 
-    private function dataProvider(): iterable
+    public function dataProvider(): iterable
     {
         yield [15, 33, new SimpleTuple(15, 33)];
         yield [48, 72, new SimpleTuple(48, 72)];

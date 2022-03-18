@@ -18,7 +18,7 @@ trait IndexedCollectionTestTrait
     protected abstract function getInstanceWithElements(array $elements): IndexedCollection;
 
     /**
-     * @dataProvider testGetDataProvider
+     * @dataProvider getDataProvider
      * @param int[] $input
      */
     public function testGet(
@@ -32,7 +32,7 @@ trait IndexedCollectionTestTrait
     }
 
     /**
-     * @dataProvider testGetDataProvider
+     * @dataProvider getDataProvider
      * @param int[] $input
      */
     public function testGetOption(
@@ -47,7 +47,7 @@ trait IndexedCollectionTestTrait
     }
 
     /**
-     * @dataProvider testGetDataProvider
+     * @dataProvider getDataProvider
      * @param int[] $input
      */
     public function testArrayAccess(
@@ -61,7 +61,7 @@ trait IndexedCollectionTestTrait
     }
 
     /**
-     * @dataProvider testGetDataProvider
+     * @dataProvider getDataProvider
      * @param int[] $input
      */
     public function testInvoke(
@@ -73,7 +73,7 @@ trait IndexedCollectionTestTrait
         TestCase::assertSame($value, $instance($index));
     }
 
-    private function testGetDataProvider(): iterable
+    public function getDataProvider(): iterable
     {
         yield [[3, 1, 8, 5, 7], 0, 3];
         yield [[3, 1, 8, 5, 7], 1, 1];
@@ -113,7 +113,7 @@ trait IndexedCollectionTestTrait
     }
 
     /**
-     * @dataProvider testDropDataProvider
+     * @dataProvider dropDataProvider
      * @param int[] $input
      * @param int $drop
      * @param int[] $expected
@@ -129,7 +129,7 @@ trait IndexedCollectionTestTrait
         TestCase::assertSame($expected, $dropped->toNative());
     }
 
-    private function testDropDataProvider(): iterable
+    public function dropDataProvider(): iterable
     {
         yield [[3, 1, 8, 6], -2, [3, 1, 8, 6]];
         yield [[3, 1, 8, 6], -1, [3, 1, 8, 6]];
@@ -142,7 +142,7 @@ trait IndexedCollectionTestTrait
     }
 
     /**
-     * @dataProvider testDropRightDataProvider
+     * @dataProvider dropRightDataProvider
      * @param int[] $input
      * @param int[] $expected
      */
@@ -157,7 +157,7 @@ trait IndexedCollectionTestTrait
         TestCase::assertSame($expected, $dropped->toNative());
     }
 
-    private function testDropRightDataProvider(): iterable
+    public function dropRightDataProvider(): iterable
     {
         yield [[3, 1, 8, 6], -2, [3, 1, 8, 6]];
         yield [[3, 1, 8, 6], -1, [3, 1, 8, 6]];
@@ -170,7 +170,7 @@ trait IndexedCollectionTestTrait
     }
 
     /**
-     * @dataProvider testReverseDataProvider
+     * @dataProvider reverseDataProvider
      * @param int[] $input
      * @param int[] $expected
      */
@@ -183,7 +183,7 @@ trait IndexedCollectionTestTrait
         TestCase::assertSame($expected, $instance->reverse()->toNative());
     }
 
-    private function testReverseDataProvider(): iterable
+    public function reverseDataProvider(): iterable
     {
         yield [[3, 1, 8, 6], [6, 8, 1, 3]];
         yield [[67, 42], [42, 67]];
@@ -192,7 +192,7 @@ trait IndexedCollectionTestTrait
     }
 
     /**
-     * @dataProvider testIndexOfDataProvider
+     * @dataProvider indexOfDataProvider
      * @param int[] $input
      */
     public function testIndexOf(
@@ -207,7 +207,7 @@ trait IndexedCollectionTestTrait
         TestCase::assertSame($expected, $index);
     }
 
-    private function testIndexOfDataProvider(): iterable
+    public function indexOfDataProvider(): iterable
     {
         yield [[3, 1, 8, 6, 5, 1, 7], 3, 0, 0];
         yield [[3, 1, 8, 6, 5, 1, 7], 1, 0, 1];
@@ -223,7 +223,7 @@ trait IndexedCollectionTestTrait
     }
 
     /**
-     * @dataProvider testIndexWhereDataProvider
+     * @dataProvider indexWhereDataProvider
      * @param int[] $input
      */
     public function testIndexWhere(
@@ -237,7 +237,7 @@ trait IndexedCollectionTestTrait
         TestCase::assertSame($expected, $index);
     }
 
-    private function testIndexWhereDataProvider(): iterable
+    public function indexWhereDataProvider(): iterable
     {
         yield [[3, 1, 2], 0, -1];
         yield [[3, 1, 8, 1, 2, 7], 0, 2];
@@ -246,7 +246,7 @@ trait IndexedCollectionTestTrait
     }
 
     /**
-     * @dataProvider testSliceDataProvider
+     * @dataProvider sliceDataProvider
      * @param int[] $input
      * @param int[] $expected
      */
@@ -262,7 +262,7 @@ trait IndexedCollectionTestTrait
         TestCase::assertSame($expected, $slice->toNative());
     }
 
-    private function testSliceDataProvider(): iterable
+    public function sliceDataProvider(): iterable
     {
         yield [[3, 1, 2, 8], -1, 5, [3, 1, 2, 8]];
         yield [[3, 1, 2, 8], -1, 4, [3, 1, 2, 8]];
@@ -275,7 +275,7 @@ trait IndexedCollectionTestTrait
     }
 
     /**
-     * @dataProvider testSortDataProvider
+     * @dataProvider sortDataProvider
      * @param int[] $input
      * @param int[] $expected
      */
@@ -289,7 +289,7 @@ trait IndexedCollectionTestTrait
         TestCase::assertSame($expected, $sorted->toNative());
     }
 
-    private function testSortDataProvider(): iterable
+    public function sortDataProvider(): iterable
     {
         yield [[3, 1, 2, 8], [1, 2, 3, 8]];
         yield [[5, 7, 5], [5, 5, 7]];
@@ -298,7 +298,7 @@ trait IndexedCollectionTestTrait
     }
 
     /**
-     * @dataProvider testSplitAtDataProvider
+     * @dataProvider splitAtDataProvider
      * @param int[] $input
      * @param int[] $leftExpected
      * @param int[] $rightExpected
@@ -319,7 +319,7 @@ trait IndexedCollectionTestTrait
     }
 
     /**
-     * @dataProvider testSplitAtDataProvider
+     * @dataProvider splitAtDataProvider
      * @param int[] $input
      * @param int[] $leftExpected
      */
@@ -334,7 +334,7 @@ trait IndexedCollectionTestTrait
         TestCase::assertSame($leftExpected, $taken->toNative());
     }
 
-    private function testSplitAtDataProvider(): iterable
+    public function splitAtDataProvider(): iterable
     {
         yield [[3, 1, 2, 8, 5, 9], -1, [], [3, 1, 2, 8, 5, 9]];
         yield [[3, 1, 2, 8, 5, 9], 0, [], [3, 1, 2, 8, 5, 9]];
@@ -348,7 +348,7 @@ trait IndexedCollectionTestTrait
     }
 
     /**
-     * @dataProvider testTakeRightDataProvider
+     * @dataProvider takeRightDataProvider
      * @param int[] $input
      * @param int[] $expected
      */
@@ -363,7 +363,7 @@ trait IndexedCollectionTestTrait
         TestCase::assertSame($expected, $taken->toNative());
     }
 
-    private function testTakeRightDataProvider(): iterable
+    public function takeRightDataProvider(): iterable
     {
         yield [[3, 1, 2, 8, 5, 9], -1, []];
         yield [[3, 1, 2, 8, 5, 9], 0, []];
@@ -377,7 +377,7 @@ trait IndexedCollectionTestTrait
     }
 
     /**
-     * @dataProvider testTakeWhileDataProvider
+     * @dataProvider takeWhileDataProvider
      * @param int[] $input
      * @param int[] $expected
      */
@@ -391,7 +391,7 @@ trait IndexedCollectionTestTrait
         TestCase::assertSame($expected, $taken->toNative());
     }
 
-    private function testTakeWhileDataProvider(): iterable
+    public function takeWhileDataProvider(): iterable
     {
         yield [[3, 1, 2, 8, 5, 9], [3, 1, 2, 8, 5, 9]];
         yield [[3, 1, 2, 8, 5, 15], [3, 1, 2, 8, 5]];

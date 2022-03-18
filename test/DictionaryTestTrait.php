@@ -96,7 +96,7 @@ trait DictionaryTestTrait
         self::assertFalse($dictionary->hasValue($invalidValue));
     }
 
-    private function gettersDataProvider(): iterable
+    public function gettersDataProvider(): iterable
     {
         yield [
             'input' => [
@@ -181,7 +181,7 @@ trait DictionaryTestTrait
         }
     }
 
-    private function puttersDataProvider(): iterable
+    public function puttersDataProvider(): iterable
     {
         yield [
             'input' => [
