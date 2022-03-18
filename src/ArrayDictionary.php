@@ -209,7 +209,7 @@ class ArrayDictionary extends AbstractDictionary
     public function filterNot(callable $filter): ArrayDictionary
     {
         return new ArrayDictionary(
-            $this->tuplesList->filter($filter),
+            $this->tuplesList->filterNot($filter),
         );
     }
 

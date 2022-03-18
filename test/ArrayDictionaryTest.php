@@ -13,7 +13,7 @@ class ArrayDictionaryTest extends TestCase
 
     protected function getInstanceWithElements(array $elements): Dictionary
     {
-        return ArrayDictionary::fromTupleArrays($elements);
+        return ArrayDictionary::fromTupleArrays(...$elements);
     }
 
     protected function getTestInstance(): TestCase
