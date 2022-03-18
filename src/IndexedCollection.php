@@ -8,27 +8,10 @@ namespace Squingla\Collections;
  *
  * @template T
  * @template-extends Collection<T>
+ * @template-extends CollectionWithKey<int,T>
  */
-interface IndexedCollection extends Collection
+interface IndexedCollection extends Collection, CollectionWithKey
 {
-    /**
-     * Returns element of collection under given index. Throws exception if index does not exist in collection.
-     *
-     * @param int $index
-     * @return T
-     * @throws NoSuchElementException if given index does not exist in array
-     */
-    public function get(int $index): mixed;
-
-    /**
-     * Returns optional containing an element of collection under given index. If index does not exist in collection,
-     * returns empty optional.
-     *
-     * @param int $index
-     * @return Optional<T>
-     */
-    public function getOption(int $index): Optional;
-
     /**
      * Returns collection containing all elements except first $count elements from left. If $count is negative or equal
      * to zero, returns this collection. If $count is equal or larger than length of collection, returns empty collection.

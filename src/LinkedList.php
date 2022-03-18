@@ -154,7 +154,7 @@ class LinkedList extends AbstractIndexedCollection
      * @param int $index
      * @return Optional<T>
      */
-    public function getOption(int $index): Optional
+    public function getOption(mixed $index): Optional
     {
         if ($index < 0) {
             /** @var Optional<T> $empty */

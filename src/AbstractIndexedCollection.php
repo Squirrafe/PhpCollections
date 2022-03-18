@@ -11,7 +11,12 @@ namespace Squingla\Collections;
  */
 abstract class AbstractIndexedCollection extends AbstractCollection implements IndexedCollection
 {
-    public function get(int $index): mixed
+    /**
+     * @param int $index
+     * @return T
+     * @throws NoSuchElementException
+     */
+    public function get(mixed $index): mixed
     {
         $optional = $this->getOption($index);
         if ($optional->nonEmpty()) {
@@ -27,5 +32,53 @@ abstract class AbstractIndexedCollection extends AbstractCollection implements I
             $this->take($index),
             $this->drop($index),
         ];
+    }
+
+    /**
+     * @param int $offset
+     * @return bool
+     */
+    public function offsetExists(mixed $offset): bool
+    {
+        return is_int($offset) && $offset >= 0 && $offset < $this->getLength();
+    }
+
+    /**
+     * @param int $offset
+     * @return T
+     */
+    public function offsetGet(mixed $offset): mixed
+    {
+        return $this->get($offset);
+    }
+
+    /**
+     * @param int $offset
+     * @param T $value
+     * @return void
+     * @throws ImmutableException
+     */
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        throw new ImmutableException("Cannot call offsetSet method on immutable collection.");
+    }
+
+    /**
+     * @param int $offset
+     * @return void
+     * @throws ImmutableException
+     */
+    public function offsetUnset(mixed $offset): void
+    {
+        throw new ImmutableException("Cannot call offsetUnset method on immutable collection.");
+    }
+
+    /**
+     * @param int $index
+     * @return T
+     */
+    public function __invoke(mixed $index): mixed
+    {
+        return $this->get($index);
     }
 }
