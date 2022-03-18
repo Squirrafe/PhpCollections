@@ -28,7 +28,11 @@ class ArrayDictionary extends AbstractDictionary
      */
     public function concat(Collection $collection): ArrayDictionary
     {
-        return new ArrayDictionary($this->tuplesList->concat($collection));
+        /** @var Collection<Tuple<K,V>> $filtered */
+        $filtered = $collection->filter(
+            fn (Tuple $t) => !$this->hasKey($t->getKey()),
+        );
+        return new ArrayDictionary($this->tuplesList->concat($filtered));
     }
 
     /**
