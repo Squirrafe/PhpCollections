@@ -4,6 +4,16 @@ Optionals are objects that represent a presence of something or a lack of someth
 types. You can also treat an optional as an collection (for example, an array) that can either be empty or contain
 exactly one value.
 
+* [Creating an optional](#creating-an-optional)
+* [Presence checking](#presence-checking)
+* [Getting content of optional](#getting-content-of-optional)
+* [Iterative methods](#iterative-methods)
+  * [Value mapping](#value-mapping)
+  * [Filtering](#filtering)
+  * [Value testing](#value-testing)
+  * [Folding and reducing](#folding-and-reducing)
+* [Optional of nullable value](#optional-of-nullable-value)
+
 ### Creating an optional
 
 You can create an optional with two static methods of `Optional` class: `some($value)` creates an optional with a value,
