@@ -1,6 +1,10 @@
 <?php
 
-namespace Squingla\Collections;
+namespace Squingla\Collections\Lists;
+
+use Squingla\Collections\AbstractCollection;
+use Squingla\Collections\ImmutableException;
+use Squingla\Collections\NoSuchElementException;
 
 /**
  * Abstract class containing basic implementation of methods in IndexCollection.

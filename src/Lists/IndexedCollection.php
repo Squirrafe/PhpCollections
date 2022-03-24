@@ -1,6 +1,9 @@
 <?php
 
-namespace Squingla\Collections;
+namespace Squingla\Collections\Lists;
+
+use Squingla\Collections\Collection;
+use Squingla\Collections\CollectionWithKey;
 
 /**
  * Interface for all collections that use integers as an index. In such collections, first element has index = 0, second
@@ -70,6 +73,11 @@ interface IndexedCollection extends Collection, CollectionWithKey
      * - if integer is equal to zero, that means that two passed elements are treated as equal.
      * - if integer is lower than zero, that means that left element is lower than right element.
      * - if integer is higher than zero, that means that left element is greater than right element.
+     *
+     * Result of sorting must be stable, that is: if there are two elements (A and B) in original collection that
+     * $ordering treats as equal (that is: $ordering(A,B) === 0), and element A is before element B in that original
+     * collection (that is: indexOf(A) < indexOf(B)), then element A should still be before element B in sorted
+     * collection.
      *
      * @param callable(T,T): int $ordering
      * @return IndexedCollection<T>

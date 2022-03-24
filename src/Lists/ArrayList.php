@@ -1,6 +1,10 @@
 <?php
 
-namespace Squingla\Collections;
+namespace Squingla\Collections\Lists;
+
+use Squingla\Collections\IterableOnce;
+use Squingla\Collections\Collection;
+use Squingla\Collections\Optional;
 
 /**
  * Class representing an array-based list. Internally, all elements of that list are stored in native PHP `array` type.

@@ -1,6 +1,11 @@
 <?php
 
-namespace Squingla\Collections;
+namespace Squingla\Collections\Dictionary;
+
+use Squingla\Collections\AbstractCollection;
+use Squingla\Collections\Dictionary\Tuple\Tuple;
+use Squingla\Collections\ImmutableException;
+use Squingla\Collections\NoSuchElementException;
 
 /**
  * Implementations of basic methods from Dictionary interface.

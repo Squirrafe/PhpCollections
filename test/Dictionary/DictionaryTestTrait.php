@@ -1,9 +1,10 @@
 <?php
 
-namespace Squingla\Test\Collections;
+namespace Squingla\Test\Collections\Dictionary;
 
-use Squingla\Collections\Dictionary;
+use Squingla\Collections\Dictionary\Dictionary;
 use Squingla\Collections\NoSuchElementException;
+use Squingla\Test\Collections\TestTrait;
 
 trait DictionaryTestTrait
 {

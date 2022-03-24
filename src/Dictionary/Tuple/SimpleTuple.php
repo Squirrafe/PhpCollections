@@ -1,6 +1,6 @@
 <?php
 
-namespace Squingla\Collections;
+namespace Squingla\Collections\Dictionary\Tuple;
 
 /**
  * Simplest form of an immutable tuple.

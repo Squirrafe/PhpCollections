@@ -1,11 +1,11 @@
 <?php
 
-namespace Squingla\Test\Collections;
+namespace Squingla\Test\Collections\Dictionary;
 
 use PHPUnit\Framework\TestCase;
-use Squingla\Collections\ArrayDictionary;
-use Squingla\Collections\Dictionary;
-use Squingla\Collections\SimpleTuple;
+use Squingla\Collections\Dictionary\ArrayDictionary;
+use Squingla\Collections\Dictionary\Dictionary;
+use Squingla\Collections\Dictionary\Tuple\SimpleTuple;
 
 class ArrayDictionaryTest extends TestCase
 {

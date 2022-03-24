@@ -1,10 +1,11 @@
 <?php
 
-namespace Squingla\Test\Collections;
+namespace Squingla\Test\Collections\Lists;
 
 use PHPUnit\Framework\TestCase;
-use Squingla\Collections\IndexedCollection;
+use Squingla\Collections\Lists\IndexedCollection;
 use Squingla\Collections\NoSuchElementException;
+use Squingla\Test\Collections\CollectionTestTrait;
 
 trait IndexedCollectionTestTrait
 {

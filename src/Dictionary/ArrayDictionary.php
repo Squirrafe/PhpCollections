@@ -1,6 +1,13 @@
 <?php
 
-namespace Squingla\Collections;
+namespace Squingla\Collections\Dictionary;
+
+use Squingla\Collections\Collection;
+use Squingla\Collections\Dictionary\Tuple\SimpleTuple;
+use Squingla\Collections\Dictionary\Tuple\Tuple;
+use Squingla\Collections\IterableOnce;
+use Squingla\Collections\Lists\ArrayList;
+use Squingla\Collections\Optional;
 
 /**
  * Simplest form of dictionary, behaves similarly to ArrayList with tuples instead of values.
@@ -234,7 +241,9 @@ class ArrayDictionary extends AbstractDictionary
      */
     public function flatMap(callable $mapper): IterableOnce
     {
-        return $this->tuplesList->flatMap($mapper);
+        /** @var IterableOnce<U> $result */
+        $result = $this->tuplesList->flatMap($mapper);
+        return $result;
     }
 
     /**
