@@ -1,6 +1,10 @@
 <?php
 
-namespace Squingla\Collections;
+namespace Squingla\Collections\Dictionary;
+
+use Squingla\Collections\Collection;
+use Squingla\Collections\CollectionWithKey;
+use Squingla\Collections\Dictionary\Tuple\Tuple;
 
 /**
  * Interface for all collections that use tuples as a values. Tuple keys must be unique in a dictionary.

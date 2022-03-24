@@ -1,9 +1,9 @@
 <?php
 
-namespace Squingla\Test\Collections;
+namespace Squingla\Test\Collections\Dictionary\Tuple;
 
 use PHPUnit\Framework\TestCase;
-use Squingla\Collections\SimpleTuple;
+use Squingla\Collections\Dictionary\Tuple\SimpleTuple;
 
 class SimpleTupleTest extends TestCase
 {

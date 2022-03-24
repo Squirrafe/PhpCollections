@@ -1,10 +1,10 @@
 <?php
 
-namespace Squingla\Test\Collections;
+namespace Squingla\Test\Collections\Lists;
 
 use PHPUnit\Framework\TestCase;
-use Squingla\Collections\AbstractIndexedCollection;
-use Squingla\Collections\LinkedList;
+use Squingla\Collections\Lists\AbstractIndexedCollection;
+use Squingla\Collections\Lists\LinkedList;
 
 class LinkedListTest extends TestCase
 {

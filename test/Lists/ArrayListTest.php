@@ -1,10 +1,10 @@
 <?php
 
-namespace Squingla\Test\Collections;
+namespace Squingla\Test\Collections\Lists;
 
 use PHPUnit\Framework\TestCase;
-use Squingla\Collections\ArrayList;
-use Squingla\Collections\IndexedCollection;
+use Squingla\Collections\Lists\ArrayList;
+use Squingla\Collections\Lists\IndexedCollection;
 
 class ArrayListTest extends TestCase
 {

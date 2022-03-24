@@ -1,6 +1,6 @@
 <?php
 
-namespace Squingla\Collections;
+namespace Squingla\Collections\Dictionary\Tuple;
 
 /**
  * Interface representing a single, immutable key-value pair.

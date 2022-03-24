@@ -1,12 +1,12 @@
 <?php
 
-namespace Squingla\Test\Collections;
+namespace Squingla\Test\Collections\Dictionary;
 
-use Squingla\Collections\Dictionary;
+use Squingla\Collections\Dictionary\Dictionary;
+use Squingla\Collections\Dictionary\Tuple\SimpleTuple;
+use Squingla\Collections\Dictionary\Tuple\Tuple;
 use Squingla\Collections\NoSuchElementException;
 use Squingla\Collections\Optional;
-use Squingla\Collections\SimpleTuple;
-use Squingla\Collections\Tuple;
 use Squingla\Collections\UnsupportedTraversalException;
 
 trait DictionaryCollectionTestTrait

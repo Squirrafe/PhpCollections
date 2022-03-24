@@ -1,6 +1,10 @@
 <?php
 
-namespace Squingla\Collections;
+namespace Squingla\Collections\Lists;
+
+use Squingla\Collections\Collection;
+use Squingla\Collections\IterableOnce;
+use Squingla\Collections\Optional;
 
 /**
  * Class representing a singly linked list. Each object of linked list is either:

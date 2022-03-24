@@ -1,6 +1,9 @@
 <?php
 
-namespace Squingla\Collections;
+namespace Squingla\Collections\Lists;
+
+use Squingla\Collections\Collection;
+use Squingla\Collections\CollectionWithKey;
 
 /**
  * Interface for all collections that use integers as an index. In such collections, first element has index = 0, second
