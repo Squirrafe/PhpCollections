@@ -74,6 +74,11 @@ interface IndexedCollection extends Collection, CollectionWithKey
      * - if integer is lower than zero, that means that left element is lower than right element.
      * - if integer is higher than zero, that means that left element is greater than right element.
      *
+     * Result of sorting must be stable, that is: if there are two elements (A and B) in original collection that
+     * $ordering treats as equal (that is: $ordering(A,B) === 0), and element A is before element B in that original
+     * collection (that is: indexOf(A) < indexOf(B)), then element A should still be before element B in sorted
+     * collection.
+     *
      * @param callable(T,T): int $ordering
      * @return IndexedCollection<T>
      */

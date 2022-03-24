@@ -4,7 +4,7 @@
 * [Interfaces in library](./interfaces.md)
 * Types of collections in library:
   * [Optionals](./optionals.md)
-  * Lists
+  * [Lists](./lists.md)
   * Dictionaries
 * Iterative methods over collections:
   * Iterating over values
