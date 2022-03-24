@@ -7,6 +7,17 @@ interface.
 There are multiple implementations of that interface. Their difference lies in how data is stored internally, but
 their outside usage is the same. In this documentation page, `ArrayList` implementation will be used as an example.
 
+* [Creating a list](#creating-a-list)
+* [Reading values](#reading-values)
+* [Converting to native array](#converting-to-native-array)
+* [Checking size](#checking-size)
+* [Deconstructing](#deconstructing)
+* [Adding new values](#adding-new-values)
+* [Cutting values](#cutting-values)
+* [Index search](#index-search)
+* [Ordering](#ordering)
+* [Iterative methods](#iterative-methods)
+
 ### Creating a list
 
 You can create a list with static `with(array $elements)` method:
