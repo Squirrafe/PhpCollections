@@ -1,5 +1,14 @@
 ## PHP Collections Library
 
+#### Installation
+
+You can install library with Composer:
+```shell
+composer require squirrafe/collections
+```
+
+#### Index
+
 * [Core concepts](./core_concepts.md)
 * [Interfaces in library](./interfaces.md)
 * Types of collections in library:
