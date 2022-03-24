@@ -1,7 +1,7 @@
 ## PHP Collections Library
 
 * [Core concepts](./core_concepts.md)
-* [Type structure in library](./type_structure.md)
+* [Interfaces in library](./interfaces.md)
 * Types of collections in library:
   * [Optionals](./optionals.md)
   * Lists
