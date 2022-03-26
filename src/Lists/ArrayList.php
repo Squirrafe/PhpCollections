@@ -29,7 +29,7 @@ class ArrayList extends AbstractIndexedCollection
      * @param T $value
      * @return ArrayList<T>
      */
-    public function appended(mixed $value): ArrayList
+    public function appended($value): ArrayList
     {
         return new ArrayList([...$this->content, $value]);
     }
@@ -38,7 +38,7 @@ class ArrayList extends AbstractIndexedCollection
      * @param T $value
      * @return ArrayList<T>
      */
-    public function prepended(mixed $value): ArrayList
+    public function prepended($value): ArrayList
     {
         return new ArrayList([$value, ...$this->content]);
     }
@@ -90,7 +90,7 @@ class ArrayList extends AbstractIndexedCollection
      * @param int $index
      * @return Optional<T>
      */
-    public function getOption(mixed $index): Optional
+    public function getOption($index): Optional
     {
         if ($index < 0 || $index >= count($this->content)) {
             /** @var Optional<T> $empty */
@@ -144,7 +144,7 @@ class ArrayList extends AbstractIndexedCollection
      * @param int $from
      * @return int
      */
-    public function indexOf(mixed $element, int $from = 0): int
+    public function indexOf($element, int $from = 0): int
     {
         $count = count($this->content);
         for ($i = max(0, $from); $i < $count; $i++) {
@@ -378,7 +378,7 @@ class ArrayList extends AbstractIndexedCollection
      * @param callable(U,T): U $operator
      * @return U
      */
-    public function foldLeft(mixed $startValue, callable $operator): mixed
+    public function foldLeft($startValue, callable $operator)
     {
         $current = $startValue;
         foreach ($this->content as $element) {
@@ -393,7 +393,7 @@ class ArrayList extends AbstractIndexedCollection
      * @param callable(T,U): U $operator
      * @return U
      */
-    public function foldRight(mixed $startValue, callable $operator): mixed
+    public function foldRight($startValue, callable $operator)
     {
         $current = $startValue;
         for ($i = count($this->content) - 1; $i >= 0; $i--) {

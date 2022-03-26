@@ -20,7 +20,7 @@ abstract class AbstractIndexedCollection extends AbstractCollection implements I
      * @return T
      * @throws NoSuchElementException
      */
-    public function get(mixed $index): mixed
+    public function get($index)
     {
         $optional = $this->getOption($index);
         if ($optional->nonEmpty()) {
@@ -42,7 +42,7 @@ abstract class AbstractIndexedCollection extends AbstractCollection implements I
      * @param int $offset
      * @return bool
      */
-    public function offsetExists(mixed $offset): bool
+    public function offsetExists($offset): bool
     {
         return is_int($offset) && $offset >= 0 && $offset < $this->getLength();
     }
@@ -51,7 +51,7 @@ abstract class AbstractIndexedCollection extends AbstractCollection implements I
      * @param int $offset
      * @return T
      */
-    public function offsetGet(mixed $offset): mixed
+    public function offsetGet($offset)
     {
         return $this->get($offset);
     }
@@ -62,7 +62,7 @@ abstract class AbstractIndexedCollection extends AbstractCollection implements I
      * @return void
      * @throws ImmutableException
      */
-    public function offsetSet(mixed $offset, mixed $value): void
+    public function offsetSet($offset, $value): void
     {
         throw new ImmutableException("Cannot call offsetSet method on immutable collection.");
     }
@@ -72,7 +72,7 @@ abstract class AbstractIndexedCollection extends AbstractCollection implements I
      * @return void
      * @throws ImmutableException
      */
-    public function offsetUnset(mixed $offset): void
+    public function offsetUnset($offset): void
     {
         throw new ImmutableException("Cannot call offsetUnset method on immutable collection.");
     }
@@ -81,7 +81,7 @@ abstract class AbstractIndexedCollection extends AbstractCollection implements I
      * @param int $index
      * @return T
      */
-    public function __invoke(mixed $index): mixed
+    public function __invoke($index)
     {
         return $this->get($index);
     }

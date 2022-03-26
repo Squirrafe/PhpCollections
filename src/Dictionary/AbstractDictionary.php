@@ -21,7 +21,7 @@ abstract class AbstractDictionary extends AbstractCollection implements Dictiona
      * @param K $offset
      * @return bool
      */
-    public function offsetExists(mixed $offset): bool
+    public function offsetExists($offset): bool
     {
         return $this->hasKey($offset);
     }
@@ -30,7 +30,7 @@ abstract class AbstractDictionary extends AbstractCollection implements Dictiona
      * @param K $offset
      * @return V
      */
-    public function offsetGet(mixed $offset): mixed
+    public function offsetGet($offset)
     {
         return $this->get($offset);
     }
@@ -41,7 +41,7 @@ abstract class AbstractDictionary extends AbstractCollection implements Dictiona
      * @return void
      * @throws ImmutableException
      */
-    public function offsetSet(mixed $offset, mixed $value): void
+    public function offsetSet($offset, $value): void
     {
         throw new ImmutableException("Cannot call offsetSet method on immutable collection.");
     }
@@ -51,7 +51,7 @@ abstract class AbstractDictionary extends AbstractCollection implements Dictiona
      * @return void
      * @throws ImmutableException
      */
-    public function offsetUnset(mixed $offset): void
+    public function offsetUnset($offset): void
     {
         throw new ImmutableException("Cannot call offsetUnset method on immutable collection.");
     }
@@ -60,7 +60,7 @@ abstract class AbstractDictionary extends AbstractCollection implements Dictiona
      * @param K $index
      * @return V
      */
-    public function __invoke(mixed $index): mixed
+    public function __invoke($index)
     {
         return $this->get($index);
     }
@@ -69,7 +69,7 @@ abstract class AbstractDictionary extends AbstractCollection implements Dictiona
      * @param Tuple<K,V> $value
      * @return Dictionary<K,V>
      */
-    public function appended(mixed $value): Dictionary
+    public function appended($value): Dictionary
     {
         return $this->put($value->getKey(), $value->getValue());
     }
@@ -78,7 +78,7 @@ abstract class AbstractDictionary extends AbstractCollection implements Dictiona
      * @param Tuple<K,V> $value
      * @return Dictionary<K,V>
      */
-    public function prepended(mixed $value): Dictionary
+    public function prepended($value): Dictionary
     {
         return $this->put($value->getKey(), $value->getValue());
     }
@@ -88,7 +88,7 @@ abstract class AbstractDictionary extends AbstractCollection implements Dictiona
      * @return V
      * @throws NoSuchElementException
      */
-    public function get(mixed $key): mixed
+    public function get($key)
     {
         $optional = $this->getOption($key);
         if ($optional->isEmpty()) {
@@ -102,7 +102,7 @@ abstract class AbstractDictionary extends AbstractCollection implements Dictiona
      * @param V $value
      * @return Dictionary<K,V>
      */
-    public function put(mixed $key, mixed $value): Dictionary
+    public function put($key, $value): Dictionary
     {
         if ($this->hasKey($key)) {
             return $this;

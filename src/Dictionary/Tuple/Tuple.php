@@ -15,12 +15,12 @@ interface Tuple
      *
      * @return K
      */
-    public function getKey(): mixed;
+    public function getKey();
 
     /**
      * Returns value part of a tuple.
      *
      * @return V
      */
-    public function getValue(): mixed;
+    public function getValue();
 }
