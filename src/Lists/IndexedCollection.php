@@ -44,7 +44,7 @@ interface IndexedCollection extends Collection, CollectionWithKey
      * @param int $from
      * @return int
      */
-    public function indexOf(mixed $element, int $from = 0): int;
+    public function indexOf($element, int $from = 0): int;
 
     /**
      * Returns index of first element in collection that matches given filter. If $from argument is greater than zero,

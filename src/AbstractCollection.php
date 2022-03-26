@@ -13,7 +13,7 @@ use Traversable;
  */
 abstract class AbstractCollection implements Collection
 {
-    public function head(): mixed
+    public function head()
     {
         $headOption = $this->headOption();
         if ($headOption->isEmpty()) {
@@ -58,7 +58,7 @@ abstract class AbstractCollection implements Collection
         return $this->filter($filter)->getLength();
     }
 
-    public function reduceLeft(callable $operator): mixed
+    public function reduceLeft(callable $operator)
     {
         $optional = $this->reduceLeftOption($operator);
         if ($optional->isEmpty()) {
@@ -68,7 +68,7 @@ abstract class AbstractCollection implements Collection
         return $optional->get();
     }
 
-    public function reduceRight(callable $operator): mixed
+    public function reduceRight(callable $operator)
     {
         $optional = $this->reduceRightOption($operator);
         if ($optional->isEmpty()) {
@@ -89,7 +89,7 @@ abstract class AbstractCollection implements Collection
          * @param T $value
          * @return Optional<T>
          */
-        $functor = function (Optional $left, mixed $value) use ($operator) {
+        $functor = function (Optional $left, $value) use ($operator) {
             if ($left->isEmpty()) {
                 /** @var Optional<T> $result */
                 $result = Optional::some($value);
@@ -115,7 +115,7 @@ abstract class AbstractCollection implements Collection
          * @param Optional<T> $right
          * @return Optional<T>
          */
-        $functor = function (mixed $value, Optional $right) use ($operator) {
+        $functor = function ($value, Optional $right) use ($operator) {
             if ($right->isEmpty()) {
                 /** @var Optional<T> $result */
                 $result = Optional::some($value);

@@ -15,14 +15,14 @@ interface Collection extends IterableOnce
      * @param T $value
      * @return Collection<T>
      */
-    public function appended(mixed $value): Collection;
+    public function appended($value): Collection;
 
     /**
      * Creates a new collection with a value added to beginning of application.
      * @param T $value
      * @return Collection<T>
      */
-    public function prepended(mixed $value): Collection;
+    public function prepended($value): Collection;
 
     /**
      * Merges two collections of the same type into one collection containing all elements of both collections.
@@ -38,7 +38,7 @@ interface Collection extends IterableOnce
      * @return T
      * @throws NoSuchElementException if collection is empty
      */
-    public function head(): mixed;
+    public function head();
 
     /**
      * Returns optional containing first element of collection. If collection is empty, returns empty optional.

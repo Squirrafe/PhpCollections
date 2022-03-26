@@ -112,7 +112,7 @@ interface IterableOnce extends IteratorAggregate
      * @param callable(U,T): U $operator
      * @return U
      */
-    public function foldLeft(mixed $startValue, callable $operator): mixed;
+    public function foldLeft($startValue, callable $operator);
 
     /**
      * Applies a binary operator to a start value and all elements of this iterator, going right to left.
@@ -122,7 +122,7 @@ interface IterableOnce extends IteratorAggregate
      * @param callable(T,U): U $operator
      * @return U
      */
-    public function foldRight(mixed $startValue, callable $operator): mixed;
+    public function foldRight($startValue, callable $operator);
 
     /**
      * Applies a function to every element in collection.
@@ -140,7 +140,7 @@ interface IterableOnce extends IteratorAggregate
      * @return T
      * @throws UnsupportedTraversalException if collection is empty.
      */
-    public function reduceLeft(callable $operator): mixed;
+    public function reduceLeft(callable $operator);
 
     /**
      * If collection is non-empty, applies a binary operator to all elements of this collection, going left to right,
@@ -159,7 +159,7 @@ interface IterableOnce extends IteratorAggregate
      * @return T
      * @throws UnsupportedTraversalException if collection is empty.
      */
-    public function reduceRight(callable $operator): mixed;
+    public function reduceRight(callable $operator);
 
     /**
      * If collection is non-empty, applies a binary operator to all elements of this collection, going right to left,

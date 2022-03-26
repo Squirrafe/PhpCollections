@@ -80,7 +80,7 @@ class LinkedList extends AbstractIndexedCollection
      * @param T $value
      * @return LinkedList<T>
      */
-    public function appended(mixed $value): LinkedList
+    public function appended($value): LinkedList
     {
         if ($this->tail === null) {
             // current element is a terminator - should be replaced with a new element
@@ -99,7 +99,7 @@ class LinkedList extends AbstractIndexedCollection
      * @param T $value
      * @return LinkedList<T>
      */
-    public function prepended(mixed $value): LinkedList
+    public function prepended($value): LinkedList
     {
         return new LinkedList([$value], $this);
     }
@@ -158,7 +158,7 @@ class LinkedList extends AbstractIndexedCollection
      * @param int $index
      * @return Optional<T>
      */
-    public function getOption(mixed $index): Optional
+    public function getOption($index): Optional
     {
         if ($index < 0) {
             /** @var Optional<T> $empty */
@@ -206,7 +206,7 @@ class LinkedList extends AbstractIndexedCollection
      * @param int $from
      * @return int
      */
-    public function indexOf(mixed $element, int $from = 0): int
+    public function indexOf($element, int $from = 0): int
     {
         if ($this->tail === null) {
             return -1;
@@ -457,7 +457,7 @@ class LinkedList extends AbstractIndexedCollection
         return $tailMapped;
     }
 
-    public function foldLeft(mixed $startValue, callable $operator): mixed
+    public function foldLeft($startValue, callable $operator)
     {
         if ($this->tail === null) {
             return $startValue;
@@ -466,7 +466,7 @@ class LinkedList extends AbstractIndexedCollection
         return $this->tail->foldLeft($operator($startValue, $this->element[0]), $operator);
     }
 
-    public function foldRight(mixed $startValue, callable $operator): mixed
+    public function foldRight($startValue, callable $operator)
     {
         if ($this->tail === null) {
             return $startValue;

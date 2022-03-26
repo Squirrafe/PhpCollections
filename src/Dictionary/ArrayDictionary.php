@@ -70,7 +70,7 @@ class ArrayDictionary extends AbstractDictionary
      * @param K $key
      * @return Optional<V>
      */
-    public function getOption(mixed $key): Optional
+    public function getOption($key): Optional
     {
         /** @var Optional<Tuple<K,V>> $option */
         $option = $this->tuplesList
@@ -86,7 +86,7 @@ class ArrayDictionary extends AbstractDictionary
      * @param V $value
      * @return ArrayDictionary<K,V>
      */
-    public function set(mixed $key, mixed $value): ArrayDictionary
+    public function set($key, $value): ArrayDictionary
     {
         if ($this->hasKey($key)) {
             /** @var ArrayList<Tuple<K,V>> $mapped */
@@ -107,7 +107,7 @@ class ArrayDictionary extends AbstractDictionary
      * @param V $value
      * @return ArrayDictionary<K,V>
      */
-    public function put(mixed $key, mixed $value): ArrayDictionary
+    public function put($key, $value): ArrayDictionary
     {
         if ($this->hasKey($key)) {
             return $this;
@@ -120,7 +120,7 @@ class ArrayDictionary extends AbstractDictionary
      * @param K $key
      * @return bool
      */
-    public function hasKey(mixed $key): bool
+    public function hasKey($key): bool
     {
         return $this->tuplesList->exists(fn (Tuple $t) => $t->getKey() === $key);
     }
@@ -129,7 +129,7 @@ class ArrayDictionary extends AbstractDictionary
      * @param V $value
      * @return bool
      */
-    public function hasValue(mixed $value): bool
+    public function hasValue($value): bool
     {
         return $this->tuplesList->exists(fn (Tuple $t) => $t->getValue() === $value);
     }
@@ -252,7 +252,7 @@ class ArrayDictionary extends AbstractDictionary
      * @param callable(U,Tuple<K,V>): U $operator
      * @return U
      */
-    public function foldLeft(mixed $startValue, callable $operator): mixed
+    public function foldLeft($startValue, callable $operator)
     {
         return $this->tuplesList->foldLeft($startValue, $operator);
     }
@@ -263,7 +263,7 @@ class ArrayDictionary extends AbstractDictionary
      * @param callable(Tuple<K,V>,U): U $operator
      * @return U
      */
-    public function foldRight(mixed $startValue, callable $operator): mixed
+    public function foldRight($startValue, callable $operator)
     {
         return $this->tuplesList->foldRight($startValue, $operator);
     }

@@ -32,7 +32,7 @@ interface Dictionary extends Collection, CollectionWithKey
      * @param V $value
      * @return Dictionary<K,V>
      */
-    public function put(mixed $key, mixed $value): Dictionary;
+    public function put($key, $value): Dictionary;
 
     /**
      * If given key does not exist in current dictionary, returns a new dictionary containing all elements of current
@@ -43,7 +43,7 @@ interface Dictionary extends Collection, CollectionWithKey
      * @param V $value
      * @return Dictionary<K,V>
      */
-    public function set(mixed $key, mixed $value): Dictionary;
+    public function set($key, $value): Dictionary;
 
     /**
      * Returns "true" if dictionary contains entry with given key, "false" otherwise.
@@ -51,7 +51,7 @@ interface Dictionary extends Collection, CollectionWithKey
      * @param K $key
      * @return bool
      */
-    public function hasKey(mixed $key): bool;
+    public function hasKey($key): bool;
 
     /**
      * Returns "true" if dictionary contains entry with given value, "false" otherwise.
@@ -59,7 +59,7 @@ interface Dictionary extends Collection, CollectionWithKey
      * @param V $value
      * @return bool
      */
-    public function hasValue(mixed $value): bool;
+    public function hasValue($value): bool;
 
     /**
      * Returns an empty dictionary.

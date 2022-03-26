@@ -20,14 +20,14 @@ interface CollectionWithKey extends ArrayAccess
      * @return V
      * @throws NoSuchElementException if given key does not have a value
      */
-    public function get(mixed $key): mixed;
+    public function get($key);
 
     /**
      * Returns optional containing element of collection with given key. If key does not exist, returns empty optional.
      * @param K $key
      * @return Optional<V>
      */
-    public function getOption(mixed $key): Optional;
+    public function getOption($key): Optional;
 
     /**
      * Returns element under chosen key. Behaviour of this method is identical to `get()`, but allows for passing
@@ -37,5 +37,5 @@ interface CollectionWithKey extends ArrayAccess
      * @return V
      * @throws NoSuchElementException
      */
-    public function __invoke(mixed $key): mixed;
+    public function __invoke($key);
 }
