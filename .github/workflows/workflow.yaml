@@ -43,6 +43,8 @@ jobs:
     needs: phpunit
     if: always()
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Download test reports
         uses: actions/download-artifact@v2
         with:
