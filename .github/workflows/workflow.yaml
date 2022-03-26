@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: Unit test report (PHP ${{ matrix.php }})
+          name: report-php-${{ matrix.php }})
           path: |
             junit.xml
             clover.xml
@@ -56,7 +56,7 @@ jobs:
       - name: Build coverage badge
         uses: timkrase/phpunit-coverage-badge@v1.2.0
         with:
-          report: 'artifacts/**/clover.xml'
+          report: 'artifacts/report-php-8.1/clover.xml'
           push_badge: true
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
 
