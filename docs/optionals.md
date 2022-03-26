@@ -80,6 +80,12 @@ Optional::some(15)->getOrNull(); // 15
 Optional::none()->getOrNull(); // null
 ```
 
+If you still want to use optional, but you want it to contain a default value, you can use `orElse($value)` method:
+```php
+Optional::some(15)->orElse(30)->get(); // 15
+Optional::none()->orElse(30)->get(); // 30
+```
+
 ### Iterative methods
 
 Because `Optional` class implements `IterableOnce` interface, it comes with some methods that, while having a huge sense
