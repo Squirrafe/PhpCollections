@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: report-php-${{ matrix.php }})
+          name: report-php-${{ matrix.php }}
           path: report
 
   phpunit-test-result:
