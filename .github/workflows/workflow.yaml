@@ -51,11 +51,19 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         with:
           files: 'artifacts/**/junit.xml'
-      - name: Add coverage comment
-        uses: danhunsaker/clover-reporter-action@v0.2.17-clover
+      - if: ${{ github.event_name == 'pull_request' }}
+        name: Download coverage artifact from main branch
+        uses: dawidd6/action-download-artifact@v2.17.0
+        continue-on-error: true
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          clover-file: artifacts/report-php-8.1/clover.xml
+          workflow: .github/workflows/workflow.yaml # this file
+          branch: main
+          path: artifacts/base
+      - name: Add coverage comment
+        uses: lucassabreu/comment-coverage-clover@main
+        with:
+          file: artifacts/report-php-8.1/clover.xml
+          base-file: artifacts/base/report-php-8.1/clover.xml
 
   phpstan:
     runs-on: ubuntu-latest
