@@ -56,17 +56,20 @@ $someInt->count(fn (int $i) => $i > 10); // 0
 $someInt->count(fn (int $i) => $i > 100); // 0
 ```
 
-You can also call `ifSet(callable $consumer)` method. Callable passed as a method argument will be invoked only
-if optional has a value. That value will be passed to consumer:
+You can also use the `ifSet(callable $consumer)` and `ifEmpty(callable $action)` methods. Callable passed in `ifSet`
+will be called only if optional has a value, while callable passed in `ifEmpty` will be called only if optional does
+not have a value. In case of `ifSet`, content of the optional will be passed as an argument to the callable.
 
 ```php
 /** @var Optional<int> $someInt */
 $someInt = Optional::some(15);
-$someInt->ifSet(fn (int $i) => doSomething($i)); // "doSomething" will be called with "15" as an argumetn
+$someInt->ifSet(fn (int $i) => doSomething($i)); // "doSomething" will be called with "15" as an argument
+$someInt->ifEmpty(fn () => doSomething()); // "doSomething" will not be called
 
 /** @var Optional<int> $emptyInt */
 $emptyInt = Optional::none();
 $emptyInt->ifSet(fn (int $i) => doSomething($i)); // "doSomething" will not be called
+$emptyInt->ifEmpty(fn () => doSomething()); // "doSomething" will be called
 ```
 
 ### Getting content of optional

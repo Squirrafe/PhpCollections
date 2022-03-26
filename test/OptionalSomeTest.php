@@ -191,4 +191,19 @@ class OptionalSomeTest extends TestCase
         self::assertTrue($called);
         self::assertSame(13, $passedValue);
     }
+
+    public function testIfEmpty(): void
+    {
+        /** @var Optional<int> $optional */
+        $optional = Optional::some(13);
+        $called = false;
+
+        $optional->ifEmpty(
+            function() use (&$called) {
+                $called = true;
+            }
+        );
+
+        self::assertFalse($called);
+    }
 }
