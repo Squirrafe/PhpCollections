@@ -307,4 +307,28 @@ class Optional implements IterableOnce
 
         return $default;
     }
+
+    /**
+     * If current optional is non-empty, returns current optional. If current optional is empty, returns a new optional
+     * containing a new value.
+     *
+     * ```
+     * $optional->orElse($value);
+     * ```
+     * is equivalent to:
+     * ```
+     * $optional->nonEmpty() ? $optional : Optional::some($value);
+     * ```
+     *
+     * @param T $value
+     * @return Optional<T>
+     */
+    public function orElse($value): Optional
+    {
+        if ($this->isSet) {
+            return $this;
+        }
+
+        return Optional::some($value);
+    }
 }

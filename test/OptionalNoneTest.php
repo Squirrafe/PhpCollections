@@ -148,4 +148,13 @@ class OptionalNoneTest extends TestCase
         $optional = Optional::none();
         self::assertEquals(30, $optional->getOrElse(30));
     }
+
+    public function testOrElse(): void
+    {
+        /** @var Optional<int> $optional */
+        $optional = Optional::none();
+        $orElse = $optional->orElse(30);
+        self::assertTrue($orElse->nonEmpty());
+        self::assertSame(30, $orElse->getOrNull());
+    }
 }
