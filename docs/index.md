@@ -7,6 +7,14 @@ You can install library with Composer:
 composer require squirrafe/collections
 ```
 
+#### Version support
+
+| PHP Version | Is supported?      | Latest library version with support                                            |
+|-------------|--------------------|--------------------------------------------------------------------------------|
+| 8.1         | :white_check_mark: | [Current version](https://github.com/Squirrafe/PhpCollections/releases/latest) |
+| 8.0         | :white_check_mark: | [Current version](https://github.com/Squirrafe/PhpCollections/releases/latest) |
+| 7.4         | :white_check_mark: | [Current version](https://github.com/Squirrafe/PhpCollections/releases/latest) |
+
 #### Index
 
 * [Core concepts](./core_concepts.md)
