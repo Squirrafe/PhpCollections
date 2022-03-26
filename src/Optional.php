@@ -344,4 +344,16 @@ class Optional implements IterableOnce
             $consumer($this->content[0]);
         }
     }
+
+    /**
+     * If current optional is empty, calls given callable. If current optional is non-empty, does nothing.
+     *
+     * @param callable(): void $action
+     */
+    public function ifEmpty(callable $action): void
+    {
+        if (!$this->isSet) {
+            $action();
+        }
+    }
 }

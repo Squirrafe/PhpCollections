@@ -172,4 +172,19 @@ class OptionalNoneTest extends TestCase
 
         self::assertFalse($called);
     }
+
+    public function testIfEmpty(): void
+    {
+        /** @var Optional<int> $optional */
+        $optional = Optional::none();
+        $called = false;
+
+        $optional->ifEmpty(
+            function() use (&$called) {
+                $called = true;
+            }
+        );
+
+        self::assertTrue($called);
+    }
 }
