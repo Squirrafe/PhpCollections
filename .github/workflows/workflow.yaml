@@ -51,14 +51,11 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         with:
           files: 'artifacts/**/junit.xml'
-      - name: test
-        run: ls && ls artifacts && ls artifacts/report-php-8.1
-      - name: Build coverage badge
-        uses: timkrase/phpunit-coverage-badge@v1.2.0
+      - name: Add coverage comment
+        uses: danhunsaker/clover-reporter-action@v0.2.17-clover
         with:
-          report: 'artifacts/report-php-8.1/clover.xml'
-          push_badge: true
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          clover-file: artifacts/report-php-8.1/clover.xml
 
   phpstan:
     runs-on: ubuntu-latest
