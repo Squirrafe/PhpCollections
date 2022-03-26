@@ -25,7 +25,7 @@ trait IndexedCollectionTestTrait
     public function testGet(
         array $input,
         int $index,
-        int $value,
+        int $value
     ): void {
         /** @var IndexedCollection<int> $instance */
         $instance = $this->getInstanceWithElements($input);
@@ -39,7 +39,7 @@ trait IndexedCollectionTestTrait
     public function testGetOption(
         array $input,
         int $index,
-        int $value,
+        int $value
     ): void {
         /** @var IndexedCollection<int> $instance */
         $instance = $this->getInstanceWithElements($input);
@@ -54,7 +54,7 @@ trait IndexedCollectionTestTrait
     public function testArrayAccess(
         array $input,
         int $index,
-        int $value,
+        int $value
     ): void {
         $instance = $this->getInstanceWithElements($input);
         TestCase::assertTrue(isset($instance[$index]));
@@ -68,7 +68,7 @@ trait IndexedCollectionTestTrait
     public function testInvoke(
         array $input,
         int $index,
-        int $value,
+        int $value
     ): void {
         $instance = $this->getInstanceWithElements($input);
         TestCase::assertSame($value, $instance($index));
@@ -255,7 +255,7 @@ trait IndexedCollectionTestTrait
         array $input,
         int $from,
         int $to,
-        array $expected,
+        array $expected
     ): void {
         /** @var IndexedCollection<int> $instance */
         $instance = $this->getInstanceWithElements($input);
@@ -282,7 +282,7 @@ trait IndexedCollectionTestTrait
      */
     public function testSort(
         array $input,
-        array $expected,
+        array $expected
     ): void {
         /** @var IndexedCollection<int> $instance */
         $instance = $this->getInstanceWithElements($input);
@@ -308,7 +308,7 @@ trait IndexedCollectionTestTrait
         array $input,
         int $index,
         array $leftExpected,
-        array $rightExpected,
+        array $rightExpected
     ): void {
         /** @var IndexedCollection<int> $instance */
         $instance = $this->getInstanceWithElements($input);
@@ -327,7 +327,7 @@ trait IndexedCollectionTestTrait
     public function testTake(
         array $input,
         int $count,
-        array $leftExpected,
+        array $leftExpected
     ): void {
         /** @var IndexedCollection<int> $instance */
         $instance = $this->getInstanceWithElements($input);
@@ -356,7 +356,7 @@ trait IndexedCollectionTestTrait
     public function testTakeRight(
         array $input,
         int $count,
-        array $expected,
+        array $expected
     ): void {
         /** @var IndexedCollection<int> $instance */
         $instance = $this->getInstanceWithElements($input);
@@ -384,7 +384,7 @@ trait IndexedCollectionTestTrait
      */
     public function testTakeWhile(
         array $input,
-        array $expected,
+        array $expected
     ): void {
         /** @var IndexedCollection<int> $instance */
         $instance = $this->getInstanceWithElements($input);

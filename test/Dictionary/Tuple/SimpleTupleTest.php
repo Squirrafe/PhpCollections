@@ -16,9 +16,9 @@ class SimpleTupleTest extends TestCase
      * @param SimpleTuple<K,V> $tuple
      */
     public function testGetKey(
-        mixed $key,
-        mixed $value,
-        SimpleTuple $tuple,
+        $key,
+        $value,
+        SimpleTuple $tuple
     ): void {
         self::assertSame($key, $tuple->getKey());
     }
@@ -32,9 +32,9 @@ class SimpleTupleTest extends TestCase
      * @param SimpleTuple<K,V> $tuple
      */
     public function testGetValue(
-        mixed $key,
-        mixed $value,
-        SimpleTuple $tuple,
+        $key,
+        $value,
+        SimpleTuple $tuple
     ): void {
         self::assertSame($value, $tuple->getValue());
     }

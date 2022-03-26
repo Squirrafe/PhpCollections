@@ -355,7 +355,7 @@ trait DictionaryIterableOnceTestTrait
         array $input,
         callable $reduce,
         Optional $reduceLeft,
-        Optional $reduceRight,
+        Optional $reduceRight
     ): void {
         $input = $this->getInstanceWithElements($input);
         $reduced = $input->reduceLeftOption($reduce);
@@ -370,7 +370,7 @@ trait DictionaryIterableOnceTestTrait
         array $input,
         callable $reduce,
         Optional $reduceLeft,
-        Optional $reduceRight,
+        Optional $reduceRight
     ): void {
         $input = $this->getInstanceWithElements($input);
         $reduced = $input->reduceRightOption($reduce);
@@ -385,7 +385,7 @@ trait DictionaryIterableOnceTestTrait
         array $input,
         callable $reduce,
         Optional $reduceLeft,
-        Optional $reduceRight,
+        Optional $reduceRight
     ): void {
         $input = $this->getInstanceWithElements($input);
 
@@ -404,7 +404,7 @@ trait DictionaryIterableOnceTestTrait
         array $input,
         callable $reduce,
         Optional $reduceLeft,
-        Optional $reduceRight,
+        Optional $reduceRight
     ): void {
         $input = $this->getInstanceWithElements($input);
 
