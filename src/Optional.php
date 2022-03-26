@@ -331,4 +331,17 @@ class Optional implements IterableOnce
 
         return Optional::some($value);
     }
+
+    /**
+     * If current optional is non-empty, calls given consumer with content of optional passed as an argument.
+     * If current optional is empty, does nothing.
+     *
+     * @param callable(T): void $consumer
+     */
+    public function ifSet(callable $consumer): void
+    {
+        if ($this->isSet) {
+            $consumer($this->content[0]);
+        }
+    }
 }

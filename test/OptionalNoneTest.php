@@ -157,4 +157,19 @@ class OptionalNoneTest extends TestCase
         self::assertTrue($orElse->nonEmpty());
         self::assertSame(30, $orElse->getOrNull());
     }
+
+    public function testIfSet(): void
+    {
+        /** @var Optional<int> $optional */
+        $optional = Optional::none();
+        $called = false;
+
+        $optional->ifSet(
+            function() use (&$called) {
+                $called = true;
+            }
+        );
+
+        self::assertFalse($called);
+    }
 }
