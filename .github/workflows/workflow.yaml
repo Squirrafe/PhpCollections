@@ -43,29 +43,24 @@ jobs:
     needs: phpunit
     if: always()
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Download test reports
-        uses: actions/download-artifact@v2
-        with:
-          path: artifacts
-      - name: Publish unit tests results
-        uses: EnricoMi/publish-unit-test-result-action@v1
-        with:
-          files: 'artifacts/**/junit.xml'
       - if: ${{ github.event_name == 'pull_request' }}
-        name: Download coverage artifact from main branch
+        name: Download reports from main branch
         uses: dawidd6/action-download-artifact@v2.17.0
         continue-on-error: true
         with:
           workflow: .github/workflows/workflow.yaml # this file
           branch: main
           path: artifacts/base
-      - name: Add coverage comment
-        uses: lucassabreu/comment-coverage-clover@main
+      - name: Download reports for current commit
+        uses: actions/download-artifact@v2
         with:
-          file: artifacts/report-php-8.1/clover.xml
-          base-file: artifacts/base/report-php-8.1/clover.xml
+          path: artifacts
+      - name: Publish test report
+        uses: ShookTea/JunitCloverReporter@v1.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          clover: artifacts/report-php-8.1/clover.xml
+          junit: artifacts/**/junit.xml
 
   phpstan:
     runs-on: ubuntu-latest
