@@ -41,8 +41,7 @@ jobs:
     needs: phpunit
     if: always()
     steps:
-      - if: ${{ github.event_name == 'pull_request' }}
-        name: Download reports from main branch
+      - name: Download reports from main branch
         uses: dawidd6/action-download-artifact@v2.17.0
         continue-on-error: true
         with:
@@ -52,13 +51,13 @@ jobs:
       - name: Download reports for current commit
         uses: actions/download-artifact@v2
         with:
-          path: artifacts
+          path: artifacts/commit
       - name: Publish test report
         uses: ShookTea/JunitCloverReporter@v1.0.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          clover: artifacts/report-php-8.1/clover.xml
-          junit: artifacts/**/junit.xml
+          clover: artifacts/commit/report-php-8.1/clover.xml
+          junit: artifacts/commit/**/junit.xml
 
   phpstan:
     runs-on: ubuntu-latest
