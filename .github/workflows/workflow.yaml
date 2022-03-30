@@ -61,14 +61,7 @@ jobs:
         if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest
       - name: Run phpstan
-        run: mkdir -p report/junit && vendor/bin/phpstan analyse --error-format=junit > report/junit/phpstan-.xml
-        #run: vendor/bin/phpstan analyse --error-format=github
-      - name: Upload test result report
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: php-${{ matrix.php }}
-          path: report
+        run: vendor/bin/phpstan analyse --error-format=github
 
   test-reporter:
     runs-on: ubuntu-latest
