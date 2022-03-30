@@ -28,12 +28,12 @@ jobs:
         if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest
       - name: Run phpunit
-        run: vendor/bin/phpunit --log-junit report/phpunit-junit.xml
+        run: vendor/bin/phpunit --coverage-clover report/coverage/clover.xml --log-junit report/junit/unit.xml
       - name: Upload test result report
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: report-php-${{ matrix.php }}
+          name: php-${{ matrix.php }}
           path: report
 
   phpstan:
@@ -61,13 +61,13 @@ jobs:
         if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest
       - name: Run phpstan
-        run: vendor/bin/phpstan analyse --error-format=junit > report/phpstan-junit.xml
+        run: mkdir -p report/junit && vendor/bin/phpstan analyse --error-format=junit > report/junit/phpstan-.xml
         #run: vendor/bin/phpstan analyse --error-format=github
       - name: Upload test result report
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: report-php-${{ matrix.php }}
+          name: php-${{ matrix.php }}
           path: report
 
   test-reporter:
@@ -90,5 +90,5 @@ jobs:
         uses: ShookTea/JunitCloverReporter@v1.0.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          clover: artifacts/commit/report-php-8.1/clover.xml
-          junit: artifacts/commit/**/*-junit.xml
+          clover: artifacts/commit/php-8.1/coverage/clover.xml
+          junit: artifacts/commit/**/junit/*
