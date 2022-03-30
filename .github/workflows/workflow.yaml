@@ -28,7 +28,7 @@ jobs:
         if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest
       - name: Run phpunit
-        run: vendor/bin/phpunit --coverage-clover report/coverage/clover.xml --log-junit report/junit/unit.xml
+        run: vendor/bin/phpunit --coverage-clover report/clover.xml --log-junit report/phpunit.xml
       - name: Upload test result report
         uses: actions/upload-artifact@v2
         if: always()
@@ -83,5 +83,5 @@ jobs:
         uses: ShookTea/JunitCloverReporter@v1.0.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          clover: artifacts/commit/php-8.1/coverage/clover.xml
-          junit: artifacts/commit/**/junit/*
+          clover: artifacts/commit/php-8.1/clover.xml
+          junit: artifacts/commit/**/phpunit.xml

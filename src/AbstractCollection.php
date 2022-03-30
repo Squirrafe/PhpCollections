@@ -9,6 +9,7 @@ use Traversable;
  * Abstract collection containing basic implementations of most methods of interface.
  *
  * @template T
+ * @template-implements Collection<T>
  */
 abstract class AbstractCollection implements Collection
 {
