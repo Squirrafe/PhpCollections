@@ -5,6 +5,7 @@ namespace Squingla\Collections\Dictionary;
 use Squingla\Collections\Collection;
 use Squingla\Collections\CollectionWithKey;
 use Squingla\Collections\Dictionary\Tuple\Tuple;
+use Squingla\Collections\Lists\IndexedCollection;
 
 /**
  * Interface for all collections that use tuples as a values. Tuple keys must be unique in a dictionary.
@@ -60,6 +61,13 @@ interface Dictionary extends Collection, CollectionWithKey
      * @return bool
      */
     public function hasValue($value): bool;
+
+    /**
+     * Returns a list containing all key-value tuples in this dictionary.
+     *
+     * @return IndexedCollection<Tuple<K,V>>
+     */
+    public function toList(): IndexedCollection;
 
     /**
      * Returns an empty dictionary.

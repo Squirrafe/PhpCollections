@@ -92,6 +92,15 @@ class OptionalSomeTest extends TestCase
         self::assertTrue($mappedNonEmpty->exists(fn (int $i) => $i === 30));
     }
 
+    public function testFlatMapWithoutOptionalResult(): void
+    {
+        $optional = Optional::some(15);
+        $mappedNonEmpty = $optional->flatMap(fn (int $i) => $i * 2);
+
+        self::assertTrue($mappedNonEmpty->nonEmpty());
+        self::assertTrue($mappedNonEmpty->exists(fn (int $i) => $i === 30));
+    }
+
     public function testFoldLeft(): void
     {
         $optional = Optional::some(15);

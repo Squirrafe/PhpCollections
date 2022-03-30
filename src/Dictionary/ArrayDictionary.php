@@ -7,6 +7,7 @@ use Squingla\Collections\Dictionary\Tuple\SimpleTuple;
 use Squingla\Collections\Dictionary\Tuple\Tuple;
 use Squingla\Collections\IterableOnce;
 use Squingla\Collections\Lists\ArrayList;
+use Squingla\Collections\Lists\IndexedCollection;
 use Squingla\Collections\Optional;
 
 /**
@@ -275,5 +276,10 @@ class ArrayDictionary extends AbstractDictionary
     public function forEach(callable $consumer): void
     {
         $this->tuplesList->forEach($consumer);
+    }
+
+    public function toList(): IndexedCollection
+    {
+        return $this->tuplesList;
     }
 }

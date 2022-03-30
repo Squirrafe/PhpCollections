@@ -1,8 +1,6 @@
 name: Tests
 on:
-  pull_request:
-    branches:
-      - main
+  push: ~
 
 jobs:
   phpunit:
@@ -30,42 +28,13 @@ jobs:
         if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest
       - name: Run phpunit
-        run: vendor/bin/phpunit --log-junit report/junit.xml
-      - name: Upload unit test result report
+        run: vendor/bin/phpunit --coverage-clover report/clover.xml --log-junit report/phpunit.xml
+      - name: Upload test result report
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: report-php-${{ matrix.php }}
+          name: php-${{ matrix.php }}
           path: report
-
-  phpunit-test-result:
-    runs-on: ubuntu-latest
-    needs: phpunit
-    if: always()
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Download test reports
-        uses: actions/download-artifact@v2
-        with:
-          path: artifacts
-      - name: Publish unit tests results
-        uses: EnricoMi/publish-unit-test-result-action@v1
-        with:
-          files: 'artifacts/**/junit.xml'
-      - if: ${{ github.event_name == 'pull_request' }}
-        name: Download coverage artifact from main branch
-        uses: dawidd6/action-download-artifact@v2.17.0
-        continue-on-error: true
-        with:
-          workflow: .github/workflows/workflow.yaml # this file
-          branch: main
-          path: artifacts/base
-      - name: Add coverage comment
-        uses: lucassabreu/comment-coverage-clover@main
-        with:
-          file: artifacts/report-php-8.1/clover.xml
-          base-file: artifacts/base/report-php-8.1/clover.xml
 
   phpstan:
     runs-on: ubuntu-latest
@@ -92,4 +61,27 @@ jobs:
         if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest
       - name: Run phpstan
-        run: vendor/bin/phpstan analyse
+        run: vendor/bin/phpstan analyse --error-format=github
+
+  test-reporter:
+    runs-on: ubuntu-latest
+    needs: phpunit
+    if: always()
+    steps:
+      - name: Download reports from main branch
+        uses: dawidd6/action-download-artifact@v2.17.0
+        continue-on-error: true
+        with:
+          workflow: .github/workflows/workflow.yaml # this file
+          branch: main
+          path: artifacts/base
+      - name: Download reports for current commit
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts/commit
+      - name: Publish test report
+        uses: ShookTea/JunitCloverReporter@v1.0.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          clover: artifacts/commit/php-8.1/clover.xml
+          junit: artifacts/commit/**/phpunit.xml
