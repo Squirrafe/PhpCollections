@@ -3,6 +3,7 @@
 namespace Squingla\Test\Collections\Dictionary;
 
 use Squingla\Collections\Dictionary\Dictionary;
+use Squingla\Collections\Dictionary\Tuple\Tuple;
 use Squingla\Collections\NoSuchElementException;
 use Squingla\Test\Collections\TestTrait;
 
@@ -95,6 +96,25 @@ trait DictionaryTestTrait
         }
 
         self::assertFalse($dictionary->hasValue($invalidValue));
+    }
+
+    /** @dataProvider gettersDataProvider */
+    public function testToList(array $input): void
+    {
+        $dictionary = $this->getInstanceWithElements($input);
+        $list = $dictionary->toList();
+        self::assertSame(count($input), $list->getLength());
+
+        $tuplesInArray = [];
+        /** @var Tuple $tuple */
+        foreach ($list as $tuple) {
+            self::assertContains([$tuple->getKey(), $tuple->getValue()], $input);
+            $tuplesInArray[] = [$tuple->getKey(), $tuple->getValue()];
+        }
+
+        foreach ($input as $entry) {
+            self::assertContains($entry, $tuplesInArray);
+        }
     }
 
     public function gettersDataProvider(): iterable
