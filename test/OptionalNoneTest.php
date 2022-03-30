@@ -68,7 +68,7 @@ class OptionalNoneTest extends TestCase
 
     public function testFlatMap(): void
     {
-        self::assertTrue(Optional::none()->flatMap(fn ($i) => Optional::some($i))->isEmpty());
+        self::assertFalse(Optional::none()->flatMap(fn ($i) => Optional::some($i))->isEmpty());
     }
 
     public function testFoldLeft(): void
