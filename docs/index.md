@@ -9,11 +9,11 @@ composer require squirrafe/collections
 
 #### Version support
 
-| PHP Version | Is supported?      | Latest library version with support                                            |
-|-------------|--------------------|--------------------------------------------------------------------------------|
-| 8.1         | :white_check_mark: | [Current version](https://github.com/Squirrafe/PhpCollections/releases/latest) |
-| 8.0         | :white_check_mark: | [Current version](https://github.com/Squirrafe/PhpCollections/releases/latest) |
-| 7.4         | :white_check_mark: | [Current version](https://github.com/Squirrafe/PhpCollections/releases/latest) |
+| PHP Version | Is supported? | Latest library version with support                                            |
+|-------------|---------------|--------------------------------------------------------------------------------|
+| 8.1         | **Yes**       | [Current version](https://github.com/Squirrafe/PhpCollections/releases/latest) |
+| 8.0         | **Yes**       | [Current version](https://github.com/Squirrafe/PhpCollections/releases/latest) |
+| 7.4         | **Yes**       | [Current version](https://github.com/Squirrafe/PhpCollections/releases/latest) |
 
 #### Index
 
@@ -22,7 +22,7 @@ composer require squirrafe/collections
 * Types of collections in library:
   * [Optionals](./optionals.md)
   * [Lists](./lists.md)
-  * Dictionaries
+  * [Dictionaries](./dictionaries.md)
 * Iterative methods over collections:
   * Iterating over values
   * Value mapping
