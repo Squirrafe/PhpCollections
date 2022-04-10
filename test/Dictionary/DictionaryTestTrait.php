@@ -144,7 +144,7 @@ trait DictionaryTestTrait
 
         $valuesInInput = [];
         foreach ($input as [$key, $value]) {
-            self::assertContains($key, $values);
+            self::assertContains($value, $values);
             $valuesInInput[] = $value;
         }
 
