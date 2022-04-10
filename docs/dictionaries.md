@@ -190,3 +190,16 @@ foreach ($dictionary as $tuple) {
     $tuple->getKey();
 }
 ```
+
+You can use `keyList` method to get a [list](./lists.md) of keys in dictionary:
+
+```php
+/** @var Dictionary<string,int> $dictionary */
+$dictionary = ArrayDictionary::fromIndexedArray([
+    "foo" => 15,
+    "baz" => 33,
+]);
+
+/** @var IndexedCollection<string> $keys */
+$keys = $dictionary->keyList();
+```
