@@ -148,9 +148,16 @@ abstract class AbstractDictionary extends AbstractCollection implements Dictiona
         return $this->filter($filter)->getLength() === $this->getLength();
     }
 
+    /**
+     * @return IndexedCollection<K>
+     */
     public function keyList(): IndexedCollection
     {
-        return $this->toList()
-            ->map(fn (Tuple $tuple) => $tuple->getKey());
+        /** @var IndexedCollection<Tuple<K,V>> $list */
+        $list = $this->toList();
+        /** @var IndexedCollection<K> $keys */
+        $keys = $list->map(fn (Tuple $tuple) => $tuple->getKey());
+
+        return $keys;
     }
 }
