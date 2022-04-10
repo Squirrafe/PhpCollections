@@ -117,13 +117,31 @@ trait DictionaryTestTrait
         }
     }
 
+    /** @dataProvider gettersDataProvider */
+    public function testKeyList(array $input): void
+    {
+        $dictionary = $this->getInstanceWithElements($input);
+        $keys = $dictionary->keyList();
+        self::assertSame(count($input), $keys->getLength());
+
+        $keysInInput = [];
+        foreach ($input as [$key, $value]) {
+            self::assertContains($key, $keys);
+            $keysInInput[] = $key;
+        }
+
+        foreach ($keys as $key) {
+            self::assertContains($key, $keysInInput);
+        }
+    }
+
     public function gettersDataProvider(): iterable
     {
         yield [
             'input' => [
                 ['key1', 'value1'],
-                ['key2', 'value2'],
-                ['key3', 'value3'],
+                ['key2', 'value2_repeated'],
+                ['key3', 'value2_repeated'],
             ],
             'invalidKey' => 'key4',
             'invalidValue' => 'value4',

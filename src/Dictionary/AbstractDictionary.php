@@ -5,6 +5,7 @@ namespace Squingla\Collections\Dictionary;
 use Squingla\Collections\AbstractCollection;
 use Squingla\Collections\Dictionary\Tuple\Tuple;
 use Squingla\Collections\ImmutableException;
+use Squingla\Collections\Lists\IndexedCollection;
 use Squingla\Collections\NoSuchElementException;
 
 /**
@@ -145,5 +146,18 @@ abstract class AbstractDictionary extends AbstractCollection implements Dictiona
     public function forAll(callable $filter): bool
     {
         return $this->filter($filter)->getLength() === $this->getLength();
+    }
+
+    /**
+     * @return IndexedCollection<K>
+     */
+    public function keyList(): IndexedCollection
+    {
+        /** @var IndexedCollection<Tuple<K,V>> $list */
+        $list = $this->toList();
+        /** @var IndexedCollection<K> $keys */
+        $keys = $list->map(fn (Tuple $tuple) => $tuple->getKey());
+
+        return $keys;
     }
 }

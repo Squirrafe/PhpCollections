@@ -70,6 +70,13 @@ interface Dictionary extends Collection, CollectionWithKey
     public function toList(): IndexedCollection;
 
     /**
+     * Returns a list containing all keys in this dictionary.
+     *
+     * @return IndexedCollection<K>
+     */
+    public function keyList(): IndexedCollection;
+
+    /**
      * Returns an empty dictionary.
      *
      * @return Dictionary<null,null>
