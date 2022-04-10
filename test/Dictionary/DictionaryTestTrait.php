@@ -135,6 +135,24 @@ trait DictionaryTestTrait
         }
     }
 
+    /** @dataProvider gettersDataProvider */
+    public function testValueList(array $input): void
+    {
+        $dictionary = $this->getInstanceWithElements($input);
+        $values = $dictionary->valueList();
+        self::assertSame(count($input), $values->getLength());
+
+        $valuesInInput = [];
+        foreach ($input as [$key, $value]) {
+            self::assertContains($key, $values);
+            $valuesInInput[] = $value;
+        }
+
+        foreach ($values as $value) {
+            self::assertContains($value, $valuesInInput);
+        }
+    }
+
     public function gettersDataProvider(): iterable
     {
         yield [

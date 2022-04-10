@@ -160,4 +160,17 @@ abstract class AbstractDictionary extends AbstractCollection implements Dictiona
 
         return $keys;
     }
+
+    /**
+     * @return IndexedCollection<V>
+     */
+    public function valueList(): IndexedCollection
+    {
+        /** @var IndexedCollection<Tuple<K,V>> $list */
+        $list = $this->toList();
+        /** @var IndexedCollection<V> $values */
+        $values = $list->map(fn (Tuple $tuple) => $tuple->getValue());
+
+        return $values;
+    }
 }

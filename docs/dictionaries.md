@@ -11,6 +11,7 @@ accepts **any** type as a key.
 * [Tuple class](#tuple-class)
 * [Creating a dictionary](#creating-a-dictionary)
 * [Reading values](#reading-values)
+* [Checking value presence](#checking-value-presence)
 * [Adding new values](#adding-new-values)
 * [Iterations](#iterations)
 
@@ -133,6 +134,21 @@ $dictionary = ArrayDictionary::fromTupleArrays(
 $dictionary[[2, 1]]; // "baz"
 ```
 
+### Checking value presence
+
+You can use `hasKey` and `hasValue` methods to check presence of chosen values:
+
+```php
+/** @var Dictionary<string,int> $dictionary */
+$dictionary = ArrayDictionary::fromIndexedArray([
+    "foo" => 15,
+    "baz" => 33,
+]);
+
+$dictionary->hasKey("foo"); // true
+$dictionary->hasValue(33); // true
+```
+
 ### Adding new values
 
 There are two basic methods for creating a new dictionary with updated values: `put($key, $value)` and
@@ -191,7 +207,7 @@ foreach ($dictionary as $tuple) {
 }
 ```
 
-You can use `keyList` method to get a [list](./lists.md) of keys in dictionary:
+You can use `keyList` and `valueList` methods to get [lists](./lists.md) of keys/values in dictionary:
 
 ```php
 /** @var Dictionary<string,int> $dictionary */
@@ -202,4 +218,7 @@ $dictionary = ArrayDictionary::fromIndexedArray([
 
 /** @var IndexedCollection<string> $keys */
 $keys = $dictionary->keyList();
+
+/** @var IndexedCollection<int> $values */
+$values = $dictionary->valueList();
 ```
