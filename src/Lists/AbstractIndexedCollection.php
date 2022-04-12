@@ -80,7 +80,8 @@ abstract class AbstractIndexedCollection extends AbstractCollection implements I
     public function unique(?callable $comparator = null): IndexedCollection
     {
         $comparator ??= fn ($a, $b) => $a === $b;
-        $result = ArrayList::empty();
+        /** @var IndexedCollection<T> $result */
+        $result = static::empty();
 
         $this->forEach(function ($element) use (&$result, $comparator) {
             $filter = function ($a) use ($comparator, $element) {
@@ -88,6 +89,7 @@ abstract class AbstractIndexedCollection extends AbstractCollection implements I
                 return $fromComparator === true || $fromComparator === 0;
             };
             if (!$result->exists($filter)) {
+                /** @var IndexedCollection<T> $result */
                 $result = $result->appended($element);
             }
         });

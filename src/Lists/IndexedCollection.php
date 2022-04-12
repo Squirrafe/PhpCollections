@@ -141,8 +141,8 @@ interface IndexedCollection extends Collection, CollectionWithKey
      * You can supply your own comparator that has to return either a boolean (with "true" meaning "two elements are
      * equal") or an integer (like in "sort", 0 is treated as "two elements are equal").
      *
-     * @param null|callable(T,T): bool|int $comparator
-     * @return IndexedCollection
+     * @param null|callable(T,T): (bool|int) $comparator
+     * @return IndexedCollection<T>
      */
     public function unique(?callable $comparator = null): IndexedCollection;
 
