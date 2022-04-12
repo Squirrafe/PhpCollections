@@ -77,6 +77,26 @@ abstract class AbstractIndexedCollection extends AbstractCollection implements I
         throw new ImmutableException("Cannot call offsetUnset method on immutable collection.");
     }
 
+    public function unique(?callable $comparator = null): IndexedCollection
+    {
+        $comparator ??= fn ($a, $b) => $a === $b;
+        /** @var IndexedCollection<T> $result */
+        $result = static::empty();
+
+        $this->forEach(function ($element) use (&$result, $comparator) {
+            $filter = function ($a) use ($comparator, $element) {
+                $fromComparator = $comparator($element, $a);
+                return $fromComparator === true || $fromComparator === 0;
+            };
+            if (!$result->exists($filter)) {
+                /** @var IndexedCollection<T> $result */
+                $result = $result->appended($element);
+            }
+        });
+
+        return $result;
+    }
+
     /**
      * @param int $index
      * @return T

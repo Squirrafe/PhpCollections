@@ -135,6 +135,18 @@ interface IndexedCollection extends Collection, CollectionWithKey
     public function takeWhile(callable $filter): IndexedCollection;
 
     /**
+     * Returns a new collection, containing unique elements of current collection. By default, this method tests for any
+     * two elements "a" and "b" if "a === b". If they are equal, only "a" will be stored in new collection.
+     *
+     * You can supply your own comparator that has to return either a boolean (with "true" meaning "two elements are
+     * equal") or an integer (like in "sort", 0 is treated as "two elements are equal").
+     *
+     * @param null|callable(T,T): (bool|int) $comparator
+     * @return IndexedCollection<T>
+     */
+    public function unique(?callable $comparator = null): IndexedCollection;
+
+    /**
      * Creates a new, empty collection.
      *
      * @return IndexedCollection<null>

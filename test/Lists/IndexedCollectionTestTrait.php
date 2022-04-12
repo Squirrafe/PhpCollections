@@ -398,4 +398,33 @@ trait IndexedCollectionTestTrait
         yield [[3, 1, 2, 8, 5, 15], [3, 1, 2, 8, 5]];
         yield [[3, 1, 2, 15, 8, 5, 9], [3, 1, 2]];
     }
+
+    /** @dataProvider uniqueDataProvider */
+    public function testUnique(array $input, array $expected, ?callable $comparator): void
+    {
+        $instance = $this->getInstanceWithElements($input);
+        $unique = $instance->unique($comparator);
+        TestCase::assertSame($expected, $unique->toNative());
+    }
+
+    public function uniqueDataProvider(): iterable
+    {
+        yield [
+            [1, 78, 8, 8, 78, 6],
+            [1, 78, 8, 6],
+            null,
+        ];
+
+        yield [
+            [[23], [56], [67, 14], [623, 562, 63], [56, 23]],
+            [[23], [67, 14], [623, 562, 63]],
+            fn (array $a, array $b) => count($a) === count($b),
+        ];
+
+        yield [
+            [[23], [56], [67, 14], [623, 562, 63], [56, 23]],
+            [[23], [67, 14], [623, 562, 63]],
+            fn (array $a, array $b) => count($a) - count($b),
+        ];
+    }
 }

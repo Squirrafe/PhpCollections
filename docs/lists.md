@@ -14,6 +14,7 @@ their outside usage is the same. In this documentation page, `ArrayList` impleme
 * [Deconstructing](#deconstructing)
 * [Adding new values](#adding-new-values)
 * [Cutting values](#cutting-values)
+* [Unique values](#unique-values)
 * [Index search](#index-search)
 * [Ordering](#ordering)
 * [Iterative methods](#iterative-methods)
@@ -219,6 +220,22 @@ $list = ArrayList::with([1, 78, 8, 5, 23, 47]);
 
 $slice = $list->slice(2, 5); // ArrayList::with([8, 5, 23])
 ```
+
+### Unique values
+
+You can get unique values of list with calling `unique()`:
+
+```php
+/** @var ArrayList<int> $list */
+$list = ArrayList::with([1, 78, 8, 8, 78, 6]);
+/** @var ArrayList<int> $unique */
+$unique = $list->unique(); // ArrayList::with([1, 78, 8, 6]);
+```
+
+By default, checking equality of two elements is done with `===` operator, but you can supply your own callable
+that gets two elements as an argument and returns one of two types:
+- `bool` - returning `true` means that two elements are equal,
+- `int` - returning `0` means that two elements are equal (behaviour compatible with [sorting](#ordering)).
 
 ### Index search
 
